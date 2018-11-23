@@ -1,0 +1,56 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 27
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    //ui
+    api 'com.android.support.constraint:constraint-layout:1.1.3'
+    api 'com.android.support:design:27.1.1'
+    api 'com.android.support:cardview-v7:27.1.1'
+    //rxjava
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'io.reactivex.rxjava2:rxjava:2.2.3'
+    api 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
+    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+    //eventbus
+    api 'org.greenrobot:eventbus:3.1.1'
+    //network
+    api 'com.google.code.gson:gson:2.8.4'
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    //di
+    api 'com.jakewharton:butterknife:8.8.1'
+    api 'com.google.dagger:dagger:2.19'
+    //picture
+    api 'com.facebook.fresco:fresco:1.3.0'
+    api 'com.facebook.fresco:animated-gif:1.3.0'
+    //other
+    api 'me.yokeyword:fragmentation:1.3.3'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
+    //rxpermissions
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+    //    testApi 'junit:junit:4.12'
+    annotationProcessor "com.jakewharton:butterknife-compiler:8.8.1"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.19"
+}
