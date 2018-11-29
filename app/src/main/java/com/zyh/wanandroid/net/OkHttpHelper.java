@@ -10,7 +10,7 @@ import android.content.Context;
 
 import com.common.util.FileUtils;
 import com.common.util.NetworkUtils;
-import com.zyh.wanandroid.MyApp;
+import com.zyh.wanandroid.App;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class OkHttpHelper {
     private static volatile OkHttpHelper sInstance;
 
     private OkHttpClient mOkHttpClient;
-    private Context mContext = MyApp.getInstance();
+    private Context mContext = App.getInstance();
 
     private OkHttpHelper() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();

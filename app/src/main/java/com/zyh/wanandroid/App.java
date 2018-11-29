@@ -1,5 +1,6 @@
 package com.zyh.wanandroid;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -30,6 +31,9 @@ import com.zyh.wanandroid.di.module.ApiModule;
 import com.zyh.wanandroid.di.module.FragmentModule;
 import com.zyh.wanandroid.utils.CustomBitmapMemoryCacheParamsSupplier;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
@@ -38,11 +42,11 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
  * Date : 2018/11/26
  * Description :
  */
-public class MyApp extends Application {
+public class App extends Application {
 
-    private static MyApp app = null;
+    private static App app;
     private AppComponent build;
-
+    private Set<Activity> allActivities;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -123,8 +127,29 @@ public class MyApp extends Application {
     private void initPrefs() {
         PrefsUtils.init(this, getPackageName() + "_preference", Context.MODE_MULTI_PROCESS);
     }
+    /**
+     * 增加Activity
+     *
+     * @param act act
+     */
+    public void addActivity(Activity act) {
+        if (allActivities == null) {
+            allActivities = new HashSet<>();
+        }
+        allActivities.add(act);
+    }
 
-    public static synchronized MyApp getInstance(){
+    /**
+     * 移除Activity
+     *
+     * @param act act
+     */
+    public void removeActivity(Activity act) {
+        if (allActivities != null) {
+            allActivities.remove(act);
+        }
+    }
+    public static synchronized App getInstance(){
         return app;
     }
 
