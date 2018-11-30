@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  >
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/selector_tab_home"
+        android:title="@string/string_home" />
+
+    <item
+        android:id="@+id/navigation_article"
+        android:icon="@drawable/selector_tab_article"
+        android:title="@string/string_article" />
+
+    <item
+        android:id="@+id/navigation_project"
+        android:icon="@drawable/selector_tab_category"
+        android:title="@string/string_project" />
+
+    <item
+        android:id="@+id/navigation_my"
+        android:icon="@drawable/selector_tab_my"
+        android:title="@string/string_my" />
+</menu>

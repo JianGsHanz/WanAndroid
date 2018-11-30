@@ -14,6 +14,7 @@ import com.common.app.DaggerAppComponent;
 import com.common.util.CrashHandler;
 import com.common.util.NetworkUtils;
 import com.common.util.PrefsUtils;
+import com.common.util.Utils;
 import com.facebook.common.memory.MemoryTrimType;
 import com.facebook.common.memory.MemoryTrimmable;
 import com.facebook.common.memory.MemoryTrimmableRegistry;
@@ -54,6 +55,7 @@ public class App extends Application {
 
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleManager());
+        Utils.init(this);
         initPrefs();
         initNetwork();
         initCrashHandler();

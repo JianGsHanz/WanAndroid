@@ -1,17 +1,18 @@
-package com.zyh.wanandroid.ui.splash
+package com.zyh.wanandroid.ui.main
 
 import com.common.base.BasePresenter
 import com.common.base.BaseView
 
 /**
  * author : zyh
- * Date : 2018/11/29
+ * Date : 2018/11/30
  * Description :
  */
-interface SplashContract{
+interface MainContract{
     interface view : BaseView{
-        fun result()
+
     }
     interface presenter : BasePresenter{
+
     }
 }
