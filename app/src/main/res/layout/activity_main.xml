@@ -12,10 +12,12 @@
         android:background="@color/colorWhite"
         android:theme="@style/AppTheme.AppBarOverlay">
         <TextView
+            android:id="@+id/title_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp18"
             android:layout_marginTop="@dimen/d_10"
+            android:layout_marginLeft="@dimen/d_10"
             android:textColor="@color/colorBlack"
             android:textStyle="bold"
             android:padding="@dimen/d_5"
@@ -42,11 +44,14 @@
         />
 
     <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/colorWhite"
         app:elevation="@dimen/d_16"
-        app:menu="@menu/navigation" />
+        app:menu="@menu/navigation"
+        app:itemIconTint="@color/colorBlack"
+        app:itemTextColor="@color/colorBlack"/>
 
 </android.support.design.widget.CoordinatorLayout>
