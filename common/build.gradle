@@ -46,6 +46,8 @@ dependencies {
     api rootProject.ext.dependencies["fresco"]
     //other
     api rootProject.ext.dependencies["fragmentation"]
+    //banner
+    api rootProject.ext.dependencies["banner"]
     //rxpermissions
     api rootProject.ext.dependencies["rxpermissions"]
     //    testApi 'junit:junit:4.12'

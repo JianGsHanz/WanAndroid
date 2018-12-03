@@ -29,7 +29,8 @@
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -37,11 +38,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="70dp"
+        android:layout_marginRight="@dimen/d_10"
         app:borderWidth="0dp"
         app:srcCompat="@drawable/svg_balloon_floating"
         app:rippleColor="@color/colorBlack"
         tools:ignore="VectorDrawableCompat"
-        />
+        app:layout_behavior="@string/float_button"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation_bottom"
@@ -52,6 +54,7 @@
         app:elevation="@dimen/d_16"
         app:menu="@menu/navigation"
         app:itemIconTint="@color/colorBlack"
-        app:itemTextColor="@color/colorBlack"/>
+        app:itemTextColor="@color/colorBlack"
+        app:layout_behavior="@string/bottom_bervaior"/>
 
 </android.support.design.widget.CoordinatorLayout>

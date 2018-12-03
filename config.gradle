@@ -30,6 +30,7 @@ ext{
             "fresco" :"com.facebook.fresco:fresco:1.3.0",
             "fragmentation" :"me.yokeyword:fragmentation:1.3.1",
             "BRVAH" :"com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30",
+            "banner" :"com.youth.banner:banner:1.4.10",
             "rxpermissions" :"com.github.tbruyelle:rxpermissions:0.10.2",
             "butterknife-compiler" :"com.jakewharton:butterknife-compiler:8.8.1",
             "butterknife-compiler" :"com.jakewharton:butterknife-compiler:8.8.1",

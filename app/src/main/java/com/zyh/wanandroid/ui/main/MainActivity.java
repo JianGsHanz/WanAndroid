@@ -1,5 +1,6 @@
 package com.zyh.wanandroid.ui.main;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.zyh.wanandroid.ui.mine.MineFragment;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * author : zyh
@@ -59,11 +61,13 @@ public class MainActivity extends BaseActivity implements IBaseMvpActivity<MainP
                 articleFragment,
                 categoryFragment,
                 mineFragment);
+
     }
 
     @Override
     public void initViewAndEvent() {
         navigationBottom.setOnNavigationItemSelectedListener(this);
+        fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorTransparent)));
     }
 
     @Override
@@ -118,5 +122,10 @@ public class MainActivity extends BaseActivity implements IBaseMvpActivity<MainP
                 break;
         }
         return true;
+    }
+
+    @OnClick(R.id.fab)
+    public void onViewClicked() {
+        homeFragment.scrollToTop();
     }
 }

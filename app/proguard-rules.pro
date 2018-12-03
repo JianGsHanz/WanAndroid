@@ -27,3 +27,7 @@
 -keepclassmembers  class **$** extends com.chad.library.adapter.base.BaseViewHolder {
      <init>(...);
 }
+# banner 的混淆代码
+-keep class com.youth.banner.** {
+    *;
+ }
