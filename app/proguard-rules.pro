@@ -31,3 +31,8 @@
 -keep class com.youth.banner.** {
     *;
  }
+ # agentweb 的混淆代码
+-keep class com.just.agentweb.** {
+     *;
+ }
+-dontwarn com.just.agentweb.**

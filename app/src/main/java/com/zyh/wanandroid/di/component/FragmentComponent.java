@@ -6,6 +6,7 @@ import com.zyh.wanandroid.ui.article.ArticleFragment;
 import com.zyh.wanandroid.ui.category.CategoryFragment;
 import com.zyh.wanandroid.ui.home.HomeFragment;
 import com.zyh.wanandroid.ui.mine.MineFragment;
+import com.zyh.wanandroid.ui.web.WebFragment;
 
 import dagger.Component;
 
@@ -21,4 +22,5 @@ public interface FragmentComponent {
     void inject(ArticleFragment articleFragment);
     void inject(CategoryFragment categoryFragment);
     void inject(MineFragment mineFragment);
+    void inject(WebFragment webFragment);
 }

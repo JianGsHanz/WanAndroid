@@ -41,7 +41,7 @@
         android:layout_marginRight="@dimen/d_10"
         app:borderWidth="0dp"
         app:srcCompat="@drawable/svg_balloon_floating"
-        app:rippleColor="@color/colorBlack"
+        app:rippleColor="@color/colorAccent"
         tools:ignore="VectorDrawableCompat"
         app:layout_behavior="@string/float_button"/>
 

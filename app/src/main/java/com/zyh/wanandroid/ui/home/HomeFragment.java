@@ -12,14 +12,17 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
+import com.common.util.ToastUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.BannerResult;
 import com.zyh.wanandroid.model.HomeResult;
 import com.zyh.wanandroid.ui.home.adapter.HomeRvAdapter;
+import com.zyh.wanandroid.ui.web.WebFragment;
 import com.zyh.wanandroid.utils.GlideImageLoader;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +42,7 @@ import butterknife.Unbinder;
  * Description :
  */
 public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements HomeFConstract.view,SwipeRefreshLayout.OnRefreshListener,
-        BaseQuickAdapter.RequestLoadMoreListener{
+        BaseQuickAdapter.RequestLoadMoreListener,BaseQuickAdapter.OnItemClickListener{
 
 
     Unbinder unbinder;
@@ -82,16 +85,18 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
 
         homeSwipeLayout.setColorSchemeColors(Color.rgb(50, 233, 189));
         homeSwipeLayout.setRefreshing(true);
+        homeRecyclerView.setAdapter(homeRvAdapter);
+
         mPresenter.loadData();
         mPresenter.autoRefresh();
 
         homeSwipeLayout.setOnRefreshListener(this);
         homeRvAdapter.setOnLoadMoreListener(this);
-        homeRecyclerView.setAdapter(homeRvAdapter);
+        homeRvAdapter.setOnItemClickListener(this);
     }
 
     @Override
-    public void getBannerSuccess(@NotNull List<BannerResult> listBaseResult) {
+    public void getBannerSuccess(@NotNull final List<BannerResult> listBaseResult) {
         linkList.clear();
         imageList.clear();
         titleList.clear();
@@ -109,6 +114,14 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
                 .setDelayTime(2500)
                 .setIndicatorGravity(BannerConfig.CENTER)
                 .start();
+
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                BannerResult datas = listBaseResult.get(position);
+                start(WebFragment.newInstance(datas.getUrl(),datas.getTitle(),datas.getId()));
+            }
+        });
 
     }
     @Override
@@ -153,5 +166,11 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
     }
 
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        ToastUtils.showShortToast("点击了 "+position+ "个");
+        HomeResult.DatasBean datas = (HomeResult.DatasBean) adapter.getData().get(position);
+//        showHideFragment(WebFragment.newInstance(datas.getLink(),datas.getTitle(),datas.getId()));
+    }
 
 }

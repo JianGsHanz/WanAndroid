@@ -1,5 +1,7 @@
 package com.zyh.wanandroid.ui.article;
 
+import android.os.Bundle;
+
 import com.common.base.BaseMvpFragment;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
@@ -29,5 +31,11 @@ public class ArticleFragment extends BaseMvpFragment<ArticleFPresenter> implemen
     @Override
     protected void initViewAndEvent() {
 
+    }
+    public static ArticleFragment newInstance() {
+        ArticleFragment fragment = new ArticleFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
     }
 }
