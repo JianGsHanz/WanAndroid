@@ -6,24 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"
-        android:background="@color/colorWhite"
-        android:theme="@style/AppTheme.AppBarOverlay">
-        <TextView
-            android:id="@+id/title_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/sp18"
-            android:layout_marginTop="@dimen/d_10"
-            android:layout_marginLeft="@dimen/d_10"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold"
-            android:padding="@dimen/d_5"
-            android:text="@string/string_home"/>
-    </android.support.design.widget.AppBarLayout>
-
+    <include layout="@layout/layout_title" />
     <!--<include layout="@layout/content_main" />-->
     <FrameLayout
         android:id="@+id/frame_layout"
@@ -45,16 +28,11 @@
         tools:ignore="VectorDrawableCompat"
         app:layout_behavior="@string/float_button"/>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation_bottom"
+    <com.zyh.wanandroid.utils.view.BottomBar
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/title_height"
         android:layout_gravity="bottom"
-        android:background="@color/colorWhite"
-        app:elevation="@dimen/d_16"
-        app:menu="@menu/navigation"
-        app:itemIconTint="@color/colorBlack"
-        app:itemTextColor="@color/colorBlack"
         app:layout_behavior="@string/bottom_bervaior"/>
 
 </android.support.design.widget.CoordinatorLayout>

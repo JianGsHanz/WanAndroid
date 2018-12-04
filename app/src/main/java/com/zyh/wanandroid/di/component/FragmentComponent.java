@@ -5,6 +5,7 @@ import com.zyh.wanandroid.di.scope.PerFragment;
 import com.zyh.wanandroid.ui.article.ArticleFragment;
 import com.zyh.wanandroid.ui.category.CategoryFragment;
 import com.zyh.wanandroid.ui.home.HomeFragment;
+import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.mine.MineFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;
 
@@ -18,6 +19,7 @@ import dagger.Component;
 @PerFragment
 @Component(dependencies = ApiComponent.class,modules = FragmentModule.class)
 public interface FragmentComponent {
+    void inject(MainFragment mainFragment);
     void inject(HomeFragment homeFragment);
     void inject(ArticleFragment articleFragment);
     void inject(CategoryFragment categoryFragment);

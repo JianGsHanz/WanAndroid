@@ -1,11 +1,17 @@
 package com.zyh.wanandroid.ui.web;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -13,6 +19,8 @@ import com.common.base.BaseMvpFragment;
 import com.just.agentweb.AgentWeb;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +41,6 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
     ProgressBar progressBar;
     @BindView(R.id.web_Layout)
     ConstraintLayout webLayout;
-    Unbinder unbinder;
     private static final String URL = "url";
 
     private static final String CONTENT = "content";
@@ -43,6 +50,10 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
     private String link,content;
 
     private int articleId;
+    private AgentWeb agentWeb;
+
+    @Inject
+    public WebFragment(){}
     @Override
     public int getLayoutId() {
         return R.layout.fragment_web;
@@ -55,51 +66,71 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
 
     @Override
     public void initViewAndEvent() {
-        AgentWeb.with(this)
-                .setAgentWebParent(webLayout,new ConstraintLayout.LayoutParams(-1,-1))
-                .useDefaultIndicator()// 使用默认进度条
+        if (articleId == -1) {
+            ivOther.setVisibility(View.INVISIBLE);
+        } else {
+            ivOther.setVisibility(View.VISIBLE);
+        }
+        agentWeb = AgentWeb.with(this)
+                .setAgentWebParent(webLayout, new ConstraintLayout.LayoutParams(-1, -1))
+                 .useDefaultIndicator()
+                 .setWebChromeClient(webChromeClient)
                 .createAgentWeb()//
                 .ready()
                 .go(link);
         tvTitle.setText(content);
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                _mActivity.onBackPressed();
-            }
-        });
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
         link = getArguments().getString(URL);
         content = getArguments().getString(CONTENT);
         articleId = getArguments().getInt(ARTICLEID);
         return rootView;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
     @OnClick({R.id.iv_back, R.id.iv_close, R.id.iv_other})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
+                _mActivity.onBackPressed();
                 break;
             case R.id.iv_close:
+                _mActivity.finish();
                 break;
             case R.id.iv_other:
                 break;
         }
     }
 
-    public static WebFragment newInstance(String url,String content,int id) {
+    @Override
+    public boolean onBackPressedSupport() {
+        return true;
+    }
+
+    private WebChromeClient webChromeClient = new WebChromeClient(){
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            if (newProgress >= 100){
+                progressBar.setVisibility(View.GONE);
+                if (view.canGoBack())
+                    ivClose.setVisibility(View.VISIBLE);
+                else
+                    ivClose.setVisibility(View.GONE);
+            }else{
+                if (progressBar.getVisibility() == View.GONE)
+                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setProgress(newProgress);
+            }
+        }
+    };
+
+
+
+    public static WebFragment newInstance(String url, String content, int id) {
         WebFragment fragment = new WebFragment();
         Bundle args = new Bundle();
         args.putString(URL, url);
@@ -109,4 +140,9 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
         return fragment;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        agentWeb.getWebLifeCycle().onDestroy();
+    }
 }

@@ -3,12 +3,14 @@ package com.zyh.wanandroid.ui.home;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
@@ -22,9 +24,14 @@ import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.BannerResult;
 import com.zyh.wanandroid.model.HomeResult;
 import com.zyh.wanandroid.ui.home.adapter.HomeRvAdapter;
+import com.zyh.wanandroid.ui.main.MainActivity;
+import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;
 import com.zyh.wanandroid.utils.GlideImageLoader;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -35,21 +42,23 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
  * author : zyh
  * Date : 2018/11/30
  * Description :
  */
-public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements HomeFConstract.view,SwipeRefreshLayout.OnRefreshListener,
-        BaseQuickAdapter.RequestLoadMoreListener,BaseQuickAdapter.OnItemClickListener{
+public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements HomeFConstract.view, SwipeRefreshLayout.OnRefreshListener,
+        BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener{
 
 
-    Unbinder unbinder;
     @BindView(R.id.home_recycler_view)
     RecyclerView homeRecyclerView;
     @BindView(R.id.home_swipe_layout)
     SwipeRefreshLayout homeSwipeLayout;
+
+    Unbinder unbinder;
     private List<HomeResult.DatasBean> homeResult = new ArrayList<>();
     private List<String> linkList = new ArrayList<>();
     private List<String> imageList = new ArrayList<>();
@@ -119,18 +128,19 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
             @Override
             public void OnBannerClick(int position) {
                 BannerResult datas = listBaseResult.get(position);
-                start(WebFragment.newInstance(datas.getUrl(),datas.getTitle(),datas.getId()));
+                ((MainFragment) getParentFragment()).goFragment(WebFragment.newInstance(datas.getUrl(),datas.getTitle(),datas.getId()));
             }
         });
 
     }
+
     @Override
-    public void getHomeListSuccess(@NotNull HomeResult homeDatasResult,boolean isRefresh) {
+    public void getHomeListSuccess(@NotNull HomeResult homeDatasResult, boolean isRefresh) {
         homeSwipeLayout.setRefreshing(false);
-        if (isRefresh){
+        if (isRefresh) {
             homeResult = homeDatasResult.getDatas();
             homeRvAdapter.replaceData(homeResult);
-        }else {
+        } else {
             homeResult.addAll(homeDatasResult.getDatas());
             homeRvAdapter.addData(homeResult);
         }
@@ -148,29 +158,31 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
         mPresenter.loadMore();
     }
 
-    public void scrollToTop() {
-        homeRecyclerView.smoothScrollToPosition(0);
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(String o){
+        homeRecyclerView.scrollToPosition(0);
     }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        HomeResult.DatasBean datas = (HomeResult.DatasBean) adapter.getData().get(position);
+        ((MainFragment) getParentFragment()).goFragment(WebFragment.newInstance(datas.getLink(),datas.getTitle(),datas.getId()));
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
+        EventBus.getDefault().register(this);
         return rootView;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        EventBus.getDefault().unregister(this);
         unbinder.unbind();
     }
-
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        ToastUtils.showShortToast("点击了 "+position+ "个");
-        HomeResult.DatasBean datas = (HomeResult.DatasBean) adapter.getData().get(position);
-//        showHideFragment(WebFragment.newInstance(datas.getLink(),datas.getTitle(),datas.getId()));
-    }
-
 }
