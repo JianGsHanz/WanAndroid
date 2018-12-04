@@ -1,17 +1,13 @@
 package com.zyh.wanandroid.ui.web;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,9 +19,7 @@ import com.zyh.wanandroid.R;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFContract.view {
 
@@ -95,10 +89,13 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
-                _mActivity.onBackPressed();
+                if (!agentWeb.back()){
+                    pop();
+                }
+
                 break;
             case R.id.iv_close:
-                _mActivity.finish();
+                pop();
                 break;
             case R.id.iv_other:
                 break;
@@ -107,6 +104,9 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
 
     @Override
     public boolean onBackPressedSupport() {
+        if (!agentWeb.back()){
+            pop();
+        }
         return true;
     }
 
@@ -125,6 +125,13 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
                 progressBar.setVisibility(View.VISIBLE);
                 progressBar.setProgress(newProgress);
             }
+        }
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            if (title !=null)
+                tvTitle.setText(title);
         }
     };
 
