@@ -1,17 +1,16 @@
 package com.zyh.wanandroid.ui.main;
 
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.common.base.BaseFragment;
-import com.common.util.ToastUtils;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.ui.article.ArticleFragment;
@@ -96,20 +95,25 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_me, "我的"));
 
         bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onTabSelected(int position, int prePosition) {
                 switch (position) {
                     case 0:
                         titleName.setText("首页");
+                        fab.setVisibility(View.VISIBLE);
                         break;
                     case 1:
                         titleName.setText("文章");
+                        fab.setVisibility(View.GONE);
                         break;
                     case 2:
                         titleName.setText("分类");
+                        fab.setVisibility(View.GONE);
                         break;
                     case 3:
                         titleName.setText("我的");
+                        fab.setVisibility(View.GONE);
                         break;
                 }
                 showHideFragment(fragments[position], fragments[prePosition]);

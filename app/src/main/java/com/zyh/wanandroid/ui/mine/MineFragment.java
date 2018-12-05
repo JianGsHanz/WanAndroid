@@ -1,16 +1,19 @@
 package com.zyh.wanandroid.ui.mine;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.common.base.BaseMvpFragment;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -22,6 +25,8 @@ import butterknife.Unbinder;
 public class MineFragment extends BaseMvpFragment<MineFPresenter> implements MineFConstract.view {
 
     Unbinder unbinder;
+    @BindView(R.id.iv_head_round)
+    SimpleDraweeView ivHeadRound;
 
     @Inject
     public MineFragment() {
@@ -39,6 +44,7 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
 
     @Override
     protected void initViewAndEvent() {
+        ivHeadRound.setImageURI(Uri.parse("res:///"+R.mipmap.ic_launcher));
     }
 
     @Override
