@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CustomSettingLayout">
+    <declare-styleable name="customSettingLayout">
         <attr name="text" format="string"/>
-        <attr name="textSize" format="dimension"/>
+        <attr name="textSize" format="float"/>
         <attr name="textColor" format="color"/>
         <attr name="layout_height" format="dimension"/>
         <attr name="drawableLeft" format="reference|integer"/>
