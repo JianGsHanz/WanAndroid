@@ -44,7 +44,7 @@ class CustomSettingLayout : ConstraintLayout{
                 custom_tv.setCompoundDrawables(customTvDrawableLeft, null, null, null)
             }
             val customTvisibilityLine = attributes.getBoolean(R.styleable.CustomSettingLayout_visibilityLine,true)
-            if (!customTvisibilityLine) custom_cl.background = null
+            if (!customTvisibilityLine) custom_cl.setBackgroundColor(Color.WHITE)
          attributes.recycle()
         }
 

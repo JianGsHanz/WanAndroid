@@ -57,7 +57,7 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
 
     @Override
     protected void initViewAndEvent() {
-        ivHeadRound.setImageURI(Uri.parse("res:///"+R.mipmap.ic_launcher));
+        ivHeadRound.setImageURI(Uri.parse("res://"+App.getInstance().getPackageName()+"/"+R.mipmap.ic_launcher));
     }
 
     @Override
