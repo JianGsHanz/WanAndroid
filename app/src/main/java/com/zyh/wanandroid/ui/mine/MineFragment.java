@@ -10,12 +10,15 @@ import com.common.base.BaseMvpFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
+import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
+import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.utils.view.CustomSettingLayout;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -57,7 +60,7 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
 
     @Override
     protected void initViewAndEvent() {
-        ivHeadRound.setImageURI(Uri.parse("res://"+App.getInstance().getPackageName()+"/"+R.mipmap.ic_head_default));
+        ivHeadRound.setImageURI(Uri.parse("res://" + App.getInstance().getPackageName() + "/" + R.mipmap.ic_head_default));
     }
 
     @Override
@@ -72,17 +75,23 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
         super.onDestroyView();
         unbinder.unbind();
     }
-    @butterknife.OnClick({R.id.bt_login_register,R.id.tv_collect,R.id.tv_knowledge,R.id.tv_todo,R.id.tv_update,R.id.tv_about})
+
+    @OnClick({R.id.bt_login_register, R.id.tv_collect, R.id.tv_knowledge, R.id.tv_todo, R.id.tv_update, R.id.tv_about})
     public void onViewClicked(View view) {
-         switch (view.getId()){
-             case R.id.bt_login_register:
-//                 start();
-                 break;
-             case R.id.tv_collect: break;
-             case R.id.tv_knowledge: break;
-             case R.id.tv_todo: break;
-             case R.id.tv_update: break;
-             case R.id.tv_about: break;
-         }
+        switch (view.getId()) {
+            case R.id.bt_login_register:
+                ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance());
+                break;
+            case R.id.tv_collect:
+                break;
+            case R.id.tv_knowledge:
+                break;
+            case R.id.tv_todo:
+                break;
+            case R.id.tv_update:
+                break;
+            case R.id.tv_about:
+                break;
+        }
     }
 }

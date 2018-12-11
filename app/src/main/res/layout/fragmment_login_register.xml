@@ -6,10 +6,22 @@
     android:background="@mipmap/ic_login_bg">
 
     <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorWhite"
+        app:tabIndicatorColor="@color/colorBlack"
         android:layout_marginTop="200dp"/>
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="248dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout" >
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
