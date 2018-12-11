@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.zyh.wanandroid.utils.view.CustomSettingLayout;
 
 /**
  * author : zyh
@@ -27,6 +28,18 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     Unbinder unbinder;
     @BindView(R.id.iv_head_round)
     SimpleDraweeView ivHeadRound;
+    @BindView(R.id.bt_login_register)
+    android.widget.Button btLoginRegister;
+    @BindView(R.id.tv_collect)
+    CustomSettingLayout tvCollect;
+    @BindView(R.id.tv_knowledge)
+    CustomSettingLayout tvKnowledge;
+    @BindView(R.id.tv_todo)
+    CustomSettingLayout tvTodo;
+    @BindView(R.id.tv_update)
+    CustomSettingLayout tvUpdate;
+    @BindView(R.id.tv_about)
+    CustomSettingLayout tvAbout;
 
     @Inject
     public MineFragment() {
@@ -49,7 +62,6 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
@@ -59,5 +71,16 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+    @butterknife.OnClick({R.id.bt_login_register,R.id.tv_collect,R.id.tv_knowledge,R.id.tv_todo,R.id.tv_update,R.id.tv_about})
+    public void onViewClicked(View view) {
+         switch (view.getId()){
+             case R.id.bt_login_register: break;
+             case R.id.tv_collect: break;
+             case R.id.tv_knowledge: break;
+             case R.id.tv_todo: break;
+             case R.id.tv_update: break;
+             case R.id.tv_about: break;
+         }
     }
 }
