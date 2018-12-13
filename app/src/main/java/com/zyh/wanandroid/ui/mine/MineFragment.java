@@ -43,6 +43,7 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     CustomSettingLayout tvUpdate;
     @BindView(R.id.tv_about)
     CustomSettingLayout tvAbout;
+    private static final int REQUEST_CODE = 0;
 
     @Inject
     public MineFragment() {
@@ -80,7 +81,7 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_login_register:
-                ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance());
+                ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(),REQUEST_CODE);
                 break;
             case R.id.tv_collect:
                 break;

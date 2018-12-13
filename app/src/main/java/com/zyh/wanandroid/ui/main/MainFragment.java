@@ -150,7 +150,10 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
         EventBus.getDefault().post("event");
     }
 
-    public void goFragment(ISupportFragment fragment) {
+    public void goFragment(ISupportFragment fragment,int requestCode) {
+        if (requestCode == -1)
         start(fragment);
+        else
+        startForResult(fragment,requestCode);
     }
 }

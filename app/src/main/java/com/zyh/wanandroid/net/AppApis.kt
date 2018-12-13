@@ -3,9 +3,9 @@ package com.zyh.wanandroid.net
 import com.zyh.wanandroid.model.BannerResult
 import com.zyh.wanandroid.model.BaseResult
 import com.zyh.wanandroid.model.HomeResult
+import com.zyh.wanandroid.model.UserResult
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 /**
  * author : zyh
@@ -28,5 +28,17 @@ interface AppApis{
      */
     @GET("article/list/{page}/json")
     fun getHomeArticleList(@Path("page")num : Int) : Observable<BaseResult<HomeResult>>
-
+    /**
+     * 登录
+     */
+    @FormUrlEncoded
+    @POST("user/login")
+    fun login(@Field("username")username: String,@Field("password") password: String) : Observable<BaseResult<UserResult>>
+    /**
+     * 注册
+     */
+    @FormUrlEncoded
+    @POST("user/register")
+    fun register(@Field("username")username: String,@Field("password") password: String,
+                 @Field("repassword")repassword: String): Observable<BaseResult<UserResult>>
 }

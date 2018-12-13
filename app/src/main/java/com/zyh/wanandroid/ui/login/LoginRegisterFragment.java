@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.common.base.BaseMvpFragment;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
+import com.zyh.wanandroid.model.UserResult;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -116,12 +117,22 @@ public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresent
     }
 
     @Override
-    public void resultLogin() {
+    public void loginSuccess(UserResult userResult) {
 
     }
 
     @Override
-    public void resultRegister() {
+    public void loginFail(String errorMsg) {
+
+    }
+
+    @Override
+    public void registerSuccess(@NotNull UserResult userResult) {
+
+    }
+
+    @Override
+    public void registerFail(@NotNull String errorMsg) {
 
     }
 }
