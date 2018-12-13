@@ -16,41 +16,44 @@ import com.zyh.wanandroid.R
  * Date : 2018/12/10
  * Description :
  */
-class CustomSettingLayout : ConstraintLayout{
-    constructor(context: Context): this(context,null){
-    }
-    constructor(context: Context,attributeSet: AttributeSet?): this(context,attributeSet,0){
-    }
-    constructor(context: Context,attributeSet: AttributeSet?, defStyleAttr: Int): super(context,attributeSet,defStyleAttr){
-        init(context,attributeSet)
+class CustomSettingLayout : ConstraintLayout {
+    constructor(context: Context) : this(context, null) {
     }
 
-    private fun init(context: Context, attributeSet: AttributeSet?){
-        LayoutInflater.from(context).inflate(R.layout.custom_setting_layout,this,true)
+    constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0) {
+    }
+
+    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int) : super(context, attributeSet, defStyleAttr) {
+        init(context, attributeSet)
+    }
+
+    private fun init(context: Context, attributeSet: AttributeSet?) {
+        LayoutInflater.from(context).inflate(R.layout.custom_setting_layout, this, true)
         val custom_cl = findViewById<ConstraintLayout>(R.id.custom_cl)
         val custom_tv = findViewById<TextView>(R.id.custom_tv)
         val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.CustomSettingLayout)
-        if (attributes!=null){
-            val customTv = attributes.getString(R.styleable.CustomSettingLayout_text)
-            if (!TextUtils.isEmpty(customTv))
-                custom_tv.text = customTv
-            val customTvSize = attributes.getDimensionPixelSize(R.styleable.CustomSettingLayout_textSize, 14)
-            custom_tv.textSize = px2sp(context,customTvSize.toFloat())
-            val customTvColor = attributes.getColor(R.styleable.CustomSettingLayout_textColor,Color.BLACK)
-            custom_tv.setTextColor(customTvColor)
-            val customTvDrawableLeft = attributes.getDrawable(R.styleable.CustomSettingLayout_drawableLeft)
-            if (customTvDrawableLeft != null) {
-                customTvDrawableLeft.setBounds(0,0,customTvDrawableLeft.minimumWidth,customTvDrawableLeft.minimumHeight)
-                custom_tv.setCompoundDrawables(customTvDrawableLeft, null, null, null)
-            }
-            val customTvisibilityLine = attributes.getBoolean(R.styleable.CustomSettingLayout_visibilityLine,true)
-            if (!customTvisibilityLine) custom_cl.setBackgroundColor(Color.WHITE)
-         attributes.recycle()
-        }
+
+        val customTv = attributes!!.getString(R.styleable.CustomSettingLayout_text)
+        if (!TextUtils.isEmpty(customTv))
+            custom_tv.text = customTv
+
+        val customTvSize = attributes!!.getDimensionPixelSize(R.styleable.CustomSettingLayout_textSize, 14)
+        custom_tv.textSize = px2sp(context, customTvSize.toFloat())
+
+        val customTvColor = attributes!!.getColor(R.styleable.CustomSettingLayout_textColor, Color.BLACK)
+        custom_tv.setTextColor(customTvColor)
+
+        val customTvDrawableLeft = attributes!!.getDrawable(R.styleable.CustomSettingLayout_drawableLeft)
+        customTvDrawableLeft!!.setBounds(0, 0, customTvDrawableLeft.minimumWidth, customTvDrawableLeft.minimumHeight)
+        custom_tv.setCompoundDrawables(customTvDrawableLeft, null, null, null)
+        val customTvisibilityLine = attributes!!.getBoolean(R.styleable.CustomSettingLayout_visibilityLine, true)
+        if (!customTvisibilityLine) custom_cl.setBackgroundColor(Color.WHITE)
+        attributes.recycle()
+
 
     }
 
-       private fun  px2sp(context: Context, pxValue: Float):Float {
+    private fun px2sp(context: Context, pxValue: Float): Float {
         val fontScale = context.resources.displayMetrics.scaledDensity
         return pxValue / fontScale + 0.5f
     }

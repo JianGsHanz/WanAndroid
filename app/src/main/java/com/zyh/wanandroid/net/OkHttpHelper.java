@@ -63,6 +63,8 @@ public class OkHttpHelper {
 //                .addNetworkInterceptor(new StethoInterceptor())
                 //http数据log，日志中打印出HTTP请求&响应数据
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(new AddCookiesInterceptor())
+                .addInterceptor(new SaveCookiesInterceptor())
                 //便于查看json
                 // .addInterceptor(new LoggerInterceptor())
 //                .addInterceptor(new UserAgentInterceptor())

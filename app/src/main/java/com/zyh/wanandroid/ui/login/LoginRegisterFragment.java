@@ -5,15 +5,20 @@ import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.common.base.BaseMvpFragment;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresenter> implements LoginRegisterFConstract.view {
@@ -21,6 +26,15 @@ public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresent
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
     Unbinder unbinder;
+    @BindView(R.id.et_user_name)
+    EditText etUserName;
+    @BindView(R.id.et_user_pwd)
+    EditText etUserPwd;
+    @BindView(R.id.et_user_re_pwd)
+    EditText etUserRePwd;
+    @BindView(R.id.bt_login_register)
+    Button btLoginRegister;
+    private int flag = 0;
 
     @Inject
     public LoginRegisterFragment() {
@@ -43,7 +57,19 @@ public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresent
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                //todo 选择切换监听
+                if (tab.getText().equals(getString(R.string.string_login))){
+                    flag = 0;
+                    if (etUserRePwd.getVisibility() == View.VISIBLE)
+                        etUserRePwd.setVisibility(View.GONE);
+                    if (btLoginRegister.getText().equals(getString(R.string.string_register)))
+                        btLoginRegister.setText(R.string.string_login);
+                }else {
+                    flag = 1;
+                    if (etUserRePwd.getVisibility() == View.GONE)
+                        etUserRePwd.setVisibility(View.VISIBLE);
+                    if (btLoginRegister.getText().equals(getString(R.string.string_login)))
+                        btLoginRegister.setText(R.string.string_register);
+                }
             }
 
             @Override
@@ -59,10 +85,11 @@ public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresent
 
     }
 
-    public static LoginRegisterFragment newInstance(){
+    public static LoginRegisterFragment newInstance() {
         LoginRegisterFragment fragment = new LoginRegisterFragment();
         return fragment;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
@@ -76,4 +103,25 @@ public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresent
         unbinder.unbind();
     }
 
+    @OnClick(R.id.bt_login_register)
+    public void onViewClicked() {
+        if (flag == 0)
+            mPresenter.requestLogin(etUserName.getText().toString().trim(),
+                    etUserPwd.getText().toString().trim());
+        else
+            mPresenter.requestRegister(etUserName.getText().toString().trim(),
+                    etUserPwd.getText().toString().trim(),
+                    etUserRePwd.getText().toString().trim());
+
+    }
+
+    @Override
+    public void resultLogin() {
+
+    }
+
+    @Override
+    public void resultRegister() {
+
+    }
 }
