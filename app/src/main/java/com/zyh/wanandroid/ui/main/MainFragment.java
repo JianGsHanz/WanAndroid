@@ -156,4 +156,10 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
         else
         startForResult(fragment,requestCode);
     }
+
+//    @Override
+//    public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
+//        super.onFragmentResult(requestCode, resultCode, data);
+//        LogUtils.e("我是MainFragment");
+//    }
 }

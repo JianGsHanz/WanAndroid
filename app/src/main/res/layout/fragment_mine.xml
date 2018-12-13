@@ -18,6 +18,15 @@
         fresco:roundAsCircle="true"
         fresco:roundingBorderColor="@color/colorBlack"
         fresco:roundingBorderWidth="1dp" />
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_head_round"
+        />
 
     <Button
         android:id="@+id/bt_login_register"
@@ -28,7 +37,7 @@
         android:text="@string/string_login_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_head_round" />
+        app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
 
     <com.zyh.wanandroid.utils.view.CustomSettingLayout
         android:id="@+id/tv_collect"

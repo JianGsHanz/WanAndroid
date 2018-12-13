@@ -106,6 +106,9 @@ public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresent
 
     @OnClick(R.id.bt_login_register)
     public void onViewClicked() {
+//        setFragmentResult(0,null);
+//        _mActivity.onBackPressed();
+
         if (flag == 0)
             mPresenter.requestLogin(etUserName.getText().toString().trim(),
                     etUserPwd.getText().toString().trim());

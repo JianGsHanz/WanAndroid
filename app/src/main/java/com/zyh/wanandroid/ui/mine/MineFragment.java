@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.common.base.BaseMvpFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -32,7 +34,7 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     @BindView(R.id.iv_head_round)
     SimpleDraweeView ivHeadRound;
     @BindView(R.id.bt_login_register)
-    android.widget.Button btLoginRegister;
+    Button btLoginRegister;
     @BindView(R.id.tv_collect)
     CustomSettingLayout tvCollect;
     @BindView(R.id.tv_knowledge)
@@ -43,6 +45,8 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     CustomSettingLayout tvUpdate;
     @BindView(R.id.tv_about)
     CustomSettingLayout tvAbout;
+    @BindView(R.id.tv_user_name)
+    TextView tvUserName;
     private static final int REQUEST_CODE = 0;
 
     @Inject
@@ -81,7 +85,8 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_login_register:
-                ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(),REQUEST_CODE);
+                ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), REQUEST_CODE);
+//                startForResult(LoginRegisterFragment.newInstance(), REQUEST_CODE);
                 break;
             case R.id.tv_collect:
                 break;
@@ -95,4 +100,10 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
                 break;
         }
     }
+
+//    @Override
+//    public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
+//        super.onFragmentResult(requestCode, resultCode, data);
+//        LogUtils.e("我是MineFragment");
+//    }
 }
