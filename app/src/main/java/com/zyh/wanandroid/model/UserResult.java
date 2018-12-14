@@ -1,11 +1,13 @@
 package com.zyh.wanandroid.model;
 
+import java.io.Serializable;
+
 /**
  * author : zyh
  * Date : 2018/12/13
  * Description :
  */
-public class UserResult {
+public class UserResult implements Serializable{
 
     /**
      * email :

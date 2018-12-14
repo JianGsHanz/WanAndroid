@@ -37,9 +37,9 @@ public class LoginRegisterFPresenter extends AbsBasePresenter<LoginRegisterFCons
             public void accept(BaseResult<UserResult> baseResult) throws Exception {
                 UserResult userResult = baseResult.getData();
                 if (baseResult.getErrorCode() == 0&&baseResult.getErrorMsg().isEmpty())
-                    mView.loginSuccess(userResult);
+                    mView.loginRegisterSuccess(userResult);
                 else
-                    mView.loginFail(baseResult.getErrorMsg());
+                    mView.loginRegisterFail(baseResult.getErrorMsg());
 
             }
         }));
@@ -54,9 +54,9 @@ public class LoginRegisterFPresenter extends AbsBasePresenter<LoginRegisterFCons
             public void accept(BaseResult<UserResult> baseResult) throws Exception {
                 UserResult userResult = baseResult.getData();
                 if (baseResult.getErrorCode() == 0&&baseResult.getErrorMsg().isEmpty())
-                    mView.registerSuccess(userResult);
+                    mView.loginRegisterSuccess(userResult);
                 else
-                    mView.registerFail(baseResult.getErrorMsg());
+                    mView.loginRegisterFail(baseResult.getErrorMsg());
             }
         }));
     }

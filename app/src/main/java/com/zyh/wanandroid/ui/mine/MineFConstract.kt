@@ -9,6 +9,11 @@ import com.common.base.BaseView
  * Description :
  */
 interface MineFConstract{
-    interface view : BaseView {}
-    interface presenter : BasePresenter{}
+    interface view : BaseView {
+        fun logoutSuccess()
+        fun logoutFail(errorMsg: String)
+    }
+    interface presenter : BasePresenter{
+        fun logout()
+    }
 }

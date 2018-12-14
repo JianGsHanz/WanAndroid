@@ -13,14 +13,18 @@ import android.widget.TextView;
 import com.common.base.BaseFragment;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
+import com.zyh.wanandroid.model.UserResult;
 import com.zyh.wanandroid.ui.article.ArticleFragment;
 import com.zyh.wanandroid.ui.category.CategoryFragment;
 import com.zyh.wanandroid.ui.home.HomeFragment;
+import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.mine.MineFragment;
 import com.zyh.wanandroid.utils.view.BottomBar;
 import com.zyh.wanandroid.utils.view.BottomBarTab;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.io.Serializable;
 
 import javax.inject.Inject;
 
@@ -157,9 +161,9 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
         startForResult(fragment,requestCode);
     }
 
-//    @Override
-//    public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
-//        super.onFragmentResult(requestCode, resultCode, data);
-//        LogUtils.e("我是MainFragment");
-//    }
+    @Override
+    public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+
+    }
 }

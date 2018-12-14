@@ -1,7 +1,9 @@
 package com.zyh.wanandroid.ui.login;
 
 import android.os.Bundle;
+import android.os.TestLooperManager;
 import android.support.design.widget.TabLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.common.base.BaseMvpFragment;
+import com.common.util.LogUtils;
+import com.common.util.PrefsUtils;
+import com.common.util.ToastUtils;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.UserResult;
+import com.zyh.wanandroid.ui.MsgEvent;
 
+import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -95,6 +102,7 @@ public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresent
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
+        EventBus.getDefault().register(getActivity());
         return rootView;
     }
 
@@ -102,13 +110,12 @@ public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresent
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(getActivity());
     }
 
     @OnClick(R.id.bt_login_register)
     public void onViewClicked() {
-//        setFragmentResult(0,null);
-//        _mActivity.onBackPressed();
-
+        judgeLoginOrRegister();
         if (flag == 0)
             mPresenter.requestLogin(etUserName.getText().toString().trim(),
                     etUserPwd.getText().toString().trim());
@@ -119,23 +126,36 @@ public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresent
 
     }
 
-    @Override
-    public void loginSuccess(UserResult userResult) {
+    private void judgeLoginOrRegister() {
+        if (TextUtils.isEmpty(etUserName.getText().toString())){
+            ToastUtils.showShortToast("请输入用户名");
+            return;
+        }else if (TextUtils.isEmpty(etUserPwd.getText().toString())){
+            ToastUtils.showShortToast("请输入密码");
+            return;
+        }else if (etUserRePwd.getVisibility() == View.VISIBLE &&
+                TextUtils.isEmpty(etUserRePwd.getText().toString())){
+            ToastUtils.showShortToast("请输入确认密码");
+            return;
+        }else if (etUserRePwd.getVisibility() == View.VISIBLE &&
+                (!etUserPwd.getText().toString().equals(etUserRePwd.getText().toString()))){
+            ToastUtils.showShortToast("两次密码输入不一致,请重新输入");
+            etUserPwd.setText("");
+            etUserRePwd.setText("");
+            return;
+        }
+    }
 
+
+    @Override
+    public void loginRegisterSuccess(@NotNull UserResult userResult) {
+        PrefsUtils.getInstance().putString("userName",userResult.getUsername());
+        EventBus.getDefault().post("loginRegisterSuccess");
+        _mActivity.onBackPressed();
     }
 
     @Override
-    public void loginFail(String errorMsg) {
-
-    }
-
-    @Override
-    public void registerSuccess(@NotNull UserResult userResult) {
-
-    }
-
-    @Override
-    public void registerFail(@NotNull String errorMsg) {
-
+    public void loginRegisterFail(@NotNull String errorMsg) {
+        ToastUtils.showShortToast(errorMsg);
     }
 }

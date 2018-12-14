@@ -48,7 +48,7 @@
         custom:drawableLeft="@mipmap/ic_collect_tag"
         custom:text="@string/string_collect"
         custom:textColor="@color/colorGray"
-        custom:textSize="14sp"/>
+        custom:textSize="@dimen/sp14"/>
 
     <com.zyh.wanandroid.utils.view.CustomSettingLayout
         android:id="@+id/tv_knowledge"
@@ -58,7 +58,7 @@
         custom:drawableLeft="@mipmap/ic_knowledge_system"
         custom:text="@string/string_know_system"
         custom:textColor="@color/colorGray"
-        custom:textSize="14sp"/>
+        custom:textSize="@dimen/sp14"/>
 
     <com.zyh.wanandroid.utils.view.CustomSettingLayout
         android:id="@+id/tv_todo"
@@ -69,7 +69,7 @@
         custom:text="@string/string_todo"
         custom:textColor="@color/colorGray"
         custom:visibilityLine="false"
-        custom:textSize="14sp"/>
+        custom:textSize="@dimen/sp14"/>
 
     <com.zyh.wanandroid.utils.view.CustomSettingLayout
         android:id="@+id/tv_update"
@@ -80,7 +80,7 @@
         custom:drawableLeft="@mipmap/ic_update"
         custom:text="@string/string_update"
         custom:textColor="@color/colorGray"
-        custom:textSize="14sp"/>
+        custom:textSize="@dimen/sp14"/>
 
     <com.zyh.wanandroid.utils.view.CustomSettingLayout
         android:id="@+id/tv_about"
@@ -91,6 +91,19 @@
         custom:text="@string/string_about"
         custom:textColor="@color/colorGray"
         custom:visibilityLine="false"
-        custom:textSize="14sp"/>
+        custom:textSize="@dimen/sp14"/>
 
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:layout_constraintTop_toBottomOf="@id/tv_about"
+        android:layout_marginTop="@dimen/d_20"
+        android:gravity="center"
+        android:visibility="gone"
+        android:background="@color/colorWhite"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp14"
+        android:text="@string/string_logout"/>
 </android.support.constraint.ConstraintLayout>

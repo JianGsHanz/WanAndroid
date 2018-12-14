@@ -2,6 +2,7 @@ package com.zyh.wanandroid.ui.mine;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.common.base.BaseMvpFragment;
+import com.common.util.LogUtils;
+import com.common.util.PrefsUtils;
+import com.common.util.ToastUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.utils.view.CustomSettingLayout;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
@@ -48,6 +55,8 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     @BindView(R.id.tv_user_name)
     TextView tvUserName;
     private static final int REQUEST_CODE = 0;
+    @BindView(R.id.tv_logout)
+    TextView tvLogout;
 
     @Inject
     public MineFragment() {
@@ -66,8 +75,60 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     @Override
     protected void initViewAndEvent() {
         ivHeadRound.setImageURI(Uri.parse("res://" + App.getInstance().getPackageName() + "/" + R.mipmap.ic_head_default));
+        isLogin();
     }
 
+    @OnClick({R.id.bt_login_register, R.id.tv_collect, R.id.tv_knowledge, R.id.tv_todo, R.id.tv_update, R.id.tv_about,R.id.tv_logout})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.bt_login_register:
+                ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), REQUEST_CODE);
+                break;
+            case R.id.tv_collect:
+                break;
+            case R.id.tv_knowledge:
+                break;
+            case R.id.tv_todo:
+                break;
+            case R.id.tv_update:
+                break;
+            case R.id.tv_about:
+                break;
+            case R.id.tv_logout:
+                mPresenter.logout();
+                break;
+        }
+    }
+
+    @Override
+    public void logoutSuccess() {
+        PrefsUtils.getInstance().remove("userName");
+        tvLogout.setVisibility(View.GONE);
+        btLoginRegister.setVisibility(View.VISIBLE);
+        tvUserName.setText("");
+    }
+
+    @Override
+    public void logoutFail(String errorMsg) {
+        ToastUtils.showShortToast(errorMsg);
+    }
+
+    private void isLogin() {
+        String userName = PrefsUtils.getInstance().getString("userName", "");
+        if (TextUtils.isEmpty(userName)){
+            tvLogout.setVisibility(View.GONE);
+            btLoginRegister.setVisibility(View.VISIBLE);
+        }else {
+            tvLogout.setVisibility(View.VISIBLE);
+            tvUserName.setText(userName);
+            btLoginRegister.setVisibility(View.GONE);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(){//todo
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
@@ -81,29 +142,5 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
         unbinder.unbind();
     }
 
-    @OnClick({R.id.bt_login_register, R.id.tv_collect, R.id.tv_knowledge, R.id.tv_todo, R.id.tv_update, R.id.tv_about})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.bt_login_register:
-                ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), REQUEST_CODE);
-//                startForResult(LoginRegisterFragment.newInstance(), REQUEST_CODE);
-                break;
-            case R.id.tv_collect:
-                break;
-            case R.id.tv_knowledge:
-                break;
-            case R.id.tv_todo:
-                break;
-            case R.id.tv_update:
-                break;
-            case R.id.tv_about:
-                break;
-        }
-    }
 
-//    @Override
-//    public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
-//        super.onFragmentResult(requestCode, resultCode, data);
-//        LogUtils.e("我是MineFragment");
-//    }
 }

@@ -10,9 +10,7 @@ interface LoginRegisterFConstract{
         fun requestRegister(username: String,password: String,repassword: String)
     }
     interface view : BaseView{
-        fun loginSuccess(userResult: UserResult)
-        fun loginFail(errorMsg: String)
-        fun registerSuccess(userResult: UserResult)
-        fun registerFail(errorMsg: String)
+        fun loginRegisterSuccess(userResult: UserResult)
+        fun loginRegisterFail(errorMsg: String)
     }
 }
