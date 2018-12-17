@@ -7,7 +7,7 @@ package com.zyh.wanandroid.ui;
  */
 public class MsgEvent {
     Object o;
-    private MsgEvent(Object o){
+    public MsgEvent(Object o){
         this.o = o;
     }
 

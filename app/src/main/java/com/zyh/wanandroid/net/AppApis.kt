@@ -1,9 +1,6 @@
 package com.zyh.wanandroid.net
 
-import com.zyh.wanandroid.model.BannerResult
-import com.zyh.wanandroid.model.BaseResult
-import com.zyh.wanandroid.model.HomeResult
-import com.zyh.wanandroid.model.UserResult
+import com.zyh.wanandroid.model.*
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -46,4 +43,9 @@ interface AppApis{
      */
     @GET("user/logout/json")
     fun logout(): Observable<BaseResult<String>>
+    /**
+     * 导航数据
+     */
+    @GET("navi/json")
+    fun getNavigation() : Observable<NavigationResult>
 }

@@ -10,16 +10,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.common.base.BaseMvpFragment;
-import com.common.util.LogUtils;
 import com.common.util.PrefsUtils;
 import com.common.util.ToastUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
+import com.zyh.wanandroid.ui.MsgEvent;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.utils.view.CustomSettingLayout;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -85,6 +86,9 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
                 ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), REQUEST_CODE);
                 break;
             case R.id.tv_collect:
+                String userName = PrefsUtils.getInstance().getString("userName", "");
+                if (TextUtils.isEmpty(userName))
+                    ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), REQUEST_CODE);
                 break;
             case R.id.tv_knowledge:
                 break;
@@ -126,13 +130,14 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(){//todo
-
+    public void onEvents(MsgEvent msgEvent){
+        isLogin();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
+        EventBus.getDefault().register(this);
         return rootView;
     }
 
@@ -140,6 +145,7 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
 

@@ -8,6 +8,7 @@ import com.zyh.wanandroid.ui.home.HomeFragment;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.mine.MineFragment;
+import com.zyh.wanandroid.ui.navigation.NavigationFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;
 
 import dagger.Component;
@@ -22,6 +23,7 @@ import dagger.Component;
 public interface FragmentComponent {
     void inject(MainFragment mainFragment);
     void inject(HomeFragment homeFragment);
+    void inject(NavigationFragment navigationFragment);
     void inject(ArticleFragment articleFragment);
     void inject(CategoryFragment categoryFragment);
     void inject(MineFragment mineFragment);

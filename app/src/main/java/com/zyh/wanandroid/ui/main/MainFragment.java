@@ -19,6 +19,7 @@ import com.zyh.wanandroid.ui.category.CategoryFragment;
 import com.zyh.wanandroid.ui.home.HomeFragment;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.mine.MineFragment;
+import com.zyh.wanandroid.ui.navigation.NavigationFragment;
 import com.zyh.wanandroid.utils.view.BottomBar;
 import com.zyh.wanandroid.utils.view.BottomBarTab;
 
@@ -44,6 +45,8 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
     @Inject
     HomeFragment homeFragment;
     @Inject
+    NavigationFragment navigationFragment;
+    @Inject
     ArticleFragment articleFragment;
     @Inject
     CategoryFragment categoryFragment;
@@ -57,7 +60,7 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
     @BindView(R.id.bottomBar)
     BottomBar bottomBar;
 
-    private SupportFragment[] fragments = new SupportFragment[4];
+    private SupportFragment[] fragments = new SupportFragment[5];
 
     @Inject
     public MainFragment() {
@@ -72,12 +75,14 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragments[0] = homeFragment;
-        fragments[1] = articleFragment;
-        fragments[2] = categoryFragment;
-        fragments[3] = mineFragment;
+        fragments[1] = navigationFragment;
+        fragments[2] = articleFragment;
+        fragments[3] = categoryFragment;
+        fragments[4] = mineFragment;
 
         loadMultipleRootFragment(R.id.frame_layout, 0,
                 homeFragment,
+                navigationFragment,
                 articleFragment,
                 categoryFragment,
                 mineFragment);
@@ -94,6 +99,7 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
 
         bottomBar
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_home, "首页"))
+                .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_home, "导航"))
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_article, "文章"))
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_category, "分类"))
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_me, "我的"));
@@ -108,14 +114,18 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
                         fab.setVisibility(View.VISIBLE);
                         break;
                     case 1:
-                        titleName.setText("文章");
+                        titleName.setText("导航");
                         fab.setVisibility(View.GONE);
                         break;
                     case 2:
-                        titleName.setText("分类");
+                        titleName.setText("文章");
                         fab.setVisibility(View.GONE);
                         break;
                     case 3:
+                        titleName.setText("分类");
+                        fab.setVisibility(View.GONE);
+                        break;
+                    case 4:
                         titleName.setText("我的");
                         fab.setVisibility(View.GONE);
                         break;

@@ -15,10 +15,13 @@
         android:layout_marginTop="200dp"/>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:layout_marginTop="248dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout" >
 
@@ -35,6 +38,7 @@
             android:layout_marginRight="@dimen/d_10"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorGray"
+            android:textCursorDrawable="@color/colorBlack"
             android:textSize="@dimen/sp16"/>
 
         <EditText
@@ -50,7 +54,7 @@
             android:layout_marginRight="@dimen/d_10"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorGray"
-            android:textCursorDrawable="@null"
+            android:textCursorDrawable="@color/colorBlack"
             android:textSize="@dimen/sp16"/>
 
         <EditText
@@ -66,7 +70,7 @@
             android:layout_marginRight="@dimen/d_10"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorGray"
-            android:textCursorDrawable="@null"
+            android:textCursorDrawable="@color/colorBlack"
             android:textSize="@dimen/sp16"
             android:visibility="gone"/>
 

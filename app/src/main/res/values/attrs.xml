@@ -7,4 +7,14 @@
         <attr name="drawableLeft" format="reference|integer"/>
         <attr name="visibilityLine" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="FlowLayoutAttrs">
+        <attr name="horizontalSpacing" format="dimension" />
+        <attr name="verticalSpacing" format="dimension" />
+        <attr name="itemSize" format="dimension" />
+        <attr name="itemColor" format="color" />
+        <attr name="backgroundResource" format="reference" />
+        <attr name="textPaddingH" format="dimension" />
+        <attr name="textPaddingV" format="dimension" />
+    </declare-styleable>
 </resources>
