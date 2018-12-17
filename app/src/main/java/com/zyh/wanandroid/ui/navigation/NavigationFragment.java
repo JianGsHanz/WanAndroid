@@ -3,17 +3,17 @@ package com.zyh.wanandroid.ui.navigation;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
-import com.common.util.LogUtils;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.NavigationResult;
 import com.zyh.wanandroid.ui.navigation.adapter.LeftAdapter;
+import com.zyh.wanandroid.ui.navigation.adapter.RightAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,6 +40,7 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
     Unbinder unbinder;
     private List<NavigationResult.DataBean> navigationList = new ArrayList<>();
     private LeftAdapter leftAdapter;
+    private RightAdapter rightAdapter;
 
     @Inject
     public NavigationFragment() {
@@ -59,9 +60,20 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
     protected void initViewAndEvent() {
         leftRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         leftAdapter = new LeftAdapter(R.layout.item_left_recycler_view, navigationList);
+        rightRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rightAdapter = new RightAdapter(R.layout.item_right_recycler_view, navigationList);
+        rightRv.setAdapter(rightAdapter);
         leftRv.setAdapter(leftAdapter);
 
         mPresenter.loadData();
+
+        leftAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                leftAdapter.setPosition(position);
+                rightAdapter.setPostion(position);
+            }
+        });
     }
 
     @Override
