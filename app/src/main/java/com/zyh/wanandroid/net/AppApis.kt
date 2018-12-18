@@ -53,4 +53,10 @@ interface AppApis{
      */
     @GET("tree/json")
     fun getArticle() : Observable<ArticleResult>
+    /**
+     * 体系数据文章
+     */
+    @GET("article/list/{page}/json")
+    fun getKnowledgeList(@Path("page")page : Int,
+                         @Query("cid")cid : Int) : Observable<KnowledgeListResult>
 }

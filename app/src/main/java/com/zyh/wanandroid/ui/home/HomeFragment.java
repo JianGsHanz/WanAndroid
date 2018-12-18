@@ -3,18 +3,15 @@ package com.zyh.wanandroid.ui.home;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
-import com.common.util.ToastUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -24,7 +21,6 @@ import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.BannerResult;
 import com.zyh.wanandroid.model.HomeResult;
 import com.zyh.wanandroid.ui.home.adapter.HomeRvAdapter;
-import com.zyh.wanandroid.ui.main.MainActivity;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;
 import com.zyh.wanandroid.utils.GlideImageLoader;
@@ -42,7 +38,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
  * author : zyh
@@ -96,7 +91,6 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
         homeSwipeLayout.setRefreshing(true);
         homeRecyclerView.setAdapter(homeRvAdapter);
 
-        mPresenter.loadData();
         mPresenter.autoRefresh();
 
         homeSwipeLayout.setOnRefreshListener(this);
@@ -149,7 +143,6 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
     @Override
     public void onRefresh() {
         homeSwipeLayout.setRefreshing(true);
-        mPresenter.loadData();
         mPresenter.autoRefresh();
     }
 
