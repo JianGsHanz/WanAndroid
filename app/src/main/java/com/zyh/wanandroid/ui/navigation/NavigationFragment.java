@@ -3,17 +3,22 @@ package com.zyh.wanandroid.ui.navigation;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
+import com.common.util.LogUtils;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.NavigationResult;
 import com.zyh.wanandroid.ui.navigation.adapter.LeftAdapter;
-import com.zyh.wanandroid.ui.navigation.adapter.RightAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,12 +40,13 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
 
     @BindView(R.id.left_rv)
     RecyclerView leftRv;
-    @BindView(R.id.right_rv)
-    RecyclerView rightRv;
     Unbinder unbinder;
-    private List<NavigationResult.DataBean> navigationList = new ArrayList<>();
+    @BindView(R.id.right_fl)
+    TagFlowLayout rightFl;
+    private List<NavigationResult.DataBean> dataList = new ArrayList<>();
+    private List<String> list = new ArrayList<>();
     private LeftAdapter leftAdapter;
-    private RightAdapter rightAdapter;
+    private NavigationResult navigationResult;
 
     @Inject
     public NavigationFragment() {
@@ -59,10 +65,7 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
     @Override
     protected void initViewAndEvent() {
         leftRv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        leftAdapter = new LeftAdapter(R.layout.item_left_recycler_view, navigationList);
-        rightRv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rightAdapter = new RightAdapter(R.layout.item_right_recycler_view, navigationList);
-        rightRv.setAdapter(rightAdapter);
+        leftAdapter = new LeftAdapter(R.layout.item_left_recycler_view, dataList);
         leftRv.setAdapter(leftAdapter);
 
         mPresenter.loadData();
@@ -71,15 +74,38 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 leftAdapter.setPosition(position);
-                rightAdapter.setPostion(position);
+                setFlowLayout(position);
+
+            }
+        });
+    }
+
+    private void setFlowLayout(int position) {
+        List<NavigationResult.DataBean.ArticlesBean> articles = navigationResult.getData().get(position).getArticles();
+        list.clear();
+        for (int i = 0; i < articles.size(); i++) {
+            list.add(articles.get(i).getTitle());
+        }
+        rightFl.setAdapter(new TagAdapter(list) {
+            @Override
+            public View getView(FlowLayout parent, int position, Object o) {
+                TextView tv = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.item_tv,
+                        rightFl, false);
+                tv.setText((String) o);
+                return tv;
             }
         });
     }
 
     @Override
     public void getNavigationSuccess(@NotNull NavigationResult navigationResult) {
+        this.navigationResult = navigationResult;
+        LogUtils.e("size = "+navigationResult.getData().size()+", "+leftAdapter.getData().size());
+        if (leftAdapter.getData().size() == 0)
         leftAdapter.addData(navigationResult.getData());
+        setFlowLayout(0);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
@@ -92,6 +118,4 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
         super.onDestroyView();
         unbinder.unbind();
     }
-
-
 }

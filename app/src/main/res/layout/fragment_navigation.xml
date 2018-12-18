@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
 
     <android.support.v7.widget.RecyclerView
@@ -12,11 +13,19 @@
         android:overScrollMode="never"
         android:scrollbars="none"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/right_rv"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:overScrollMode="never"
-        android:scrollbars="none"/>
+        android:scrollbars="none"
+        android:overScrollMode="never">
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/right_fl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d_10"
+            zhy:max_select="1"
+            />
+    </android.support.v4.widget.NestedScrollView>
+
 </LinearLayout>

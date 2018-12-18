@@ -13,19 +13,15 @@ import android.widget.TextView;
 import com.common.base.BaseFragment;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
-import com.zyh.wanandroid.model.UserResult;
 import com.zyh.wanandroid.ui.article.ArticleFragment;
 import com.zyh.wanandroid.ui.category.CategoryFragment;
 import com.zyh.wanandroid.ui.home.HomeFragment;
-import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.mine.MineFragment;
 import com.zyh.wanandroid.ui.navigation.NavigationFragment;
 import com.zyh.wanandroid.utils.view.BottomBar;
 import com.zyh.wanandroid.utils.view.BottomBarTab;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.io.Serializable;
 
 import javax.inject.Inject;
 
@@ -99,7 +95,7 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
 
         bottomBar
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_home, "首页"))
-                .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_home, "导航"))
+                .addItem(new BottomBarTab(_mActivity, R.drawable.ic_navigation, "导航"))
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_article, "文章"))
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_category, "分类"))
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_me, "我的"));

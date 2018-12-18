@@ -7,7 +7,6 @@
     tools:context=".ui.main.MainActivity">
 
     <include layout="@layout/layout_title" />
-    <!--<include layout="@layout/content_main" />-->
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
