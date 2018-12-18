@@ -27,7 +27,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
+/**
+ * author : zyh
+ * Date : 2018/12/3
+ * Description :登录注册
+ */
 public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresenter> implements LoginRegisterFConstract.view {
 
     @BindView(R.id.tab_layout)

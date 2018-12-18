@@ -48,4 +48,9 @@ interface AppApis{
      */
     @GET("navi/json")
     fun getNavigation() : Observable<NavigationResult>
+    /**
+     * 体系数据
+     */
+    @GET("tree/json")
+    fun getArticle() : Observable<ArticleResult>
 }

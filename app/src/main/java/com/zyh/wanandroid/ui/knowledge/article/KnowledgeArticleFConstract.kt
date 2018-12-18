@@ -1,14 +1,14 @@
-package com.zyh.wanandroid.ui.article
+package com.zyh.wanandroid.ui.knowledge.article
 
 import com.common.base.BasePresenter
 import com.common.base.BaseView
 
 /**
  * author : zyh
- * Date : 2018/11/30
+ * Date : 2018/12/18
  * Description :
  */
-interface ArticleFConstract{
-    interface view : BaseView {}
+interface KnowledgeArticleFConstract{
+    interface view : BaseView{}
     interface presenter : BasePresenter{}
 }

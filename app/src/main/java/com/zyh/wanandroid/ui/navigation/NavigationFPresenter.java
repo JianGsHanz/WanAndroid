@@ -30,6 +30,7 @@ public class NavigationFPresenter extends AbsBasePresenter<NavigationConstract.v
         .subscribe(new Consumer<NavigationResult>() {
             @Override
             public void accept(NavigationResult navigationResult) throws Exception {
+                if (navigationResult.getErrorCode() == 0)
                 mView.getNavigationSuccess(navigationResult);
             }
         }));

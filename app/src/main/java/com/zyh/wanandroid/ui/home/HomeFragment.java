@@ -47,7 +47,7 @@ import me.yokeyword.fragmentation.ISupportFragment;
 /**
  * author : zyh
  * Date : 2018/11/30
- * Description :
+ * Description :首页
  */
 public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements HomeFConstract.view, SwipeRefreshLayout.OnRefreshListener,
         BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener{
