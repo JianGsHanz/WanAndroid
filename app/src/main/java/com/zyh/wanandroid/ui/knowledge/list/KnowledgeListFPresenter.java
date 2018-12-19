@@ -1,7 +1,6 @@
-package com.zyh.wanandroid.ui.knowledge.article;
+package com.zyh.wanandroid.ui.knowledge.list;
 
 import com.common.base.AbsBasePresenter;
-import com.common.util.LogUtils;
 import com.common.util.RxUtils;
 import com.zyh.wanandroid.model.KnowledgeListResult;
 import com.zyh.wanandroid.net.AppApis;
@@ -26,7 +25,6 @@ public class KnowledgeListFPresenter extends AbsBasePresenter<KnowledgeListConst
         this.id = id;
         isRefresh = true;
         page = 0;
-        LogUtils.e("下拉 = page = "+page+" ,id = "+id);
         getKnowledgeList();
     }
 
@@ -34,7 +32,6 @@ public class KnowledgeListFPresenter extends AbsBasePresenter<KnowledgeListConst
     public void loadMore() {
         isRefresh = false;
         page++;
-        LogUtils.e("上拉 = page = "+page+" ,id = "+id);
         getKnowledgeList();
     }
 

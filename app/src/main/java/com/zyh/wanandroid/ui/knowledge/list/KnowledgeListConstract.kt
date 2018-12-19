@@ -1,4 +1,4 @@
-package com.zyh.wanandroid.ui.knowledge.article
+package com.zyh.wanandroid.ui.knowledge.list
 
 import com.common.base.BasePresenter
 import com.common.base.BaseView

@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.zyh.wanandroid.ui.knowledge.article.KnowledgeListFragment;
+import com.zyh.wanandroid.ui.knowledge.list.KnowledgeListFragment;
 
 import java.util.ArrayList;
 

@@ -2,6 +2,7 @@ package com.zyh.wanandroid.ui.category
 
 import com.common.base.BasePresenter
 import com.common.base.BaseView
+import com.zyh.wanandroid.model.CategoryResult
 
 /**
  * author : zyh
@@ -9,6 +10,8 @@ import com.common.base.BaseView
  * Description :
  */
 interface CategoryFConstract{
-    interface view : BaseView {}
+    interface view : BaseView {
+        fun getCategorySuccess(dataResult: List<CategoryResult.DataBean>)
+    }
     interface presenter : BasePresenter{}
 }

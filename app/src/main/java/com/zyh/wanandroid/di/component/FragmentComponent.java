@@ -2,11 +2,12 @@ package com.zyh.wanandroid.di.component;
 
 import com.zyh.wanandroid.di.module.FragmentModule;
 import com.zyh.wanandroid.di.scope.PerFragment;
-import com.zyh.wanandroid.ui.knowledge.article.KnowledgeArticleFragment;
-import com.zyh.wanandroid.ui.knowledge.article.KnowledgeListFragment;
-import com.zyh.wanandroid.ui.knowledge.knowledgeFragment;
 import com.zyh.wanandroid.ui.category.CategoryFragment;
+import com.zyh.wanandroid.ui.category.list.CategoryListFragment;
 import com.zyh.wanandroid.ui.home.HomeFragment;
+import com.zyh.wanandroid.ui.knowledge.article.KnowledgeArticleFragment;
+import com.zyh.wanandroid.ui.knowledge.knowledgeFragment;
+import com.zyh.wanandroid.ui.knowledge.list.KnowledgeListFragment;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.mine.MineFragment;
@@ -33,4 +34,5 @@ public interface FragmentComponent {
     void inject(LoginRegisterFragment loginFragment);
     void inject(KnowledgeArticleFragment knowledgeArticleFragment);
     void inject(KnowledgeListFragment knowledgeListFragment);
+    void inject(CategoryListFragment categoryListFragment);
 }
