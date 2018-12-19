@@ -2,15 +2,19 @@ package com.zyh.wanandroid.ui.knowledge.article;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
+import com.common.util.LogUtils;
+import com.common.util.ToastUtils;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.KnowledgeListResult;
@@ -55,38 +59,56 @@ public class KnowledgeListFragment extends BaseMvpFragment<KnowledgeListFPresent
 
     @Override
     protected void initViewAndEvent() {
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
         knowledgeSwipe.setColorSchemeColors(Color.rgb(50, 233, 189));
-        knowledgeSwipe.setRefreshing(true);
         knowledgeRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         knowledgeListAdapter = new KnowledgeListAdapter(R.layout.item_knowledge_list_rv,dataList);
         knowledgeRv.setAdapter(knowledgeListAdapter);
 
         knowledgeSwipe.setOnRefreshListener(this);
-        knowledgeListAdapter.setOnLoadMoreListener(this,knowledgeRv);
+        knowledgeListAdapter.setOnLoadMoreListener(this);
+        LogUtils.e("this = "+this+", "+id);
         mPresenter.autoRefresh(id);
 
-        knowledgeListAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        knowledgeListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 KnowledgeListResult.DataBean.DatasBean data = (KnowledgeListResult.DataBean.DatasBean) adapter.getData().get(position);
                 ((MainFragment)getParentFragment()).goFragment(WebFragment.newInstance(
-                     data.getLink(),data.getTitle(),data.getId()),-1);
+                        data.getLink(),data.getTitle(),data.getId()),-1);
+                ToastUtils.showShortToast(position);
             }
         });
     }
 
     @Override
     public void getKnowledgeListSuccess(@NotNull KnowledgeListResult.DataBean dataResult,boolean isRefresh) {
+        LogUtils.e("data before size = "+dataResult.getDatas().size());
         knowledgeSwipe.setRefreshing(false);
         if (isRefresh) { //刷新
             dataList = dataResult.getDatas();
             knowledgeListAdapter.replaceData(dataList);
         }else { //加载更多
+            LogUtils.e("list before  size == "+dataList.size());
             dataList.addAll(dataResult.getDatas());
+            LogUtils.e("list after  size == "+dataList.size());
             knowledgeListAdapter.addData(dataList);
         }
 
     }
+
+    @Override
+    public void getKnowledgeListFail(@NotNull String errorMsg) {
+        if (TextUtils.isEmpty(errorMsg))
+            knowledgeListAdapter.loadMoreEnd();
+        else
+            ToastUtils.showShortToast(errorMsg);
+    }
+
     //下拉刷新
     @Override
     public void onRefresh() {

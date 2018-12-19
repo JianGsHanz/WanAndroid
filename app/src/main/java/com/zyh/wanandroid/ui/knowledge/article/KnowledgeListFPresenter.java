@@ -26,7 +26,7 @@ public class KnowledgeListFPresenter extends AbsBasePresenter<KnowledgeListConst
         this.id = id;
         isRefresh = true;
         page = 0;
-        LogUtils.e(page);
+        LogUtils.e("下拉 = page = "+page+" ,id = "+id);
         getKnowledgeList();
     }
 
@@ -34,7 +34,7 @@ public class KnowledgeListFPresenter extends AbsBasePresenter<KnowledgeListConst
     public void loadMore() {
         isRefresh = false;
         page++;
-        LogUtils.e(page);
+        LogUtils.e("上拉 = page = "+page+" ,id = "+id);
         getKnowledgeList();
     }
 
@@ -44,7 +44,10 @@ public class KnowledgeListFPresenter extends AbsBasePresenter<KnowledgeListConst
                 .subscribe(new Consumer<KnowledgeListResult>() {
                     @Override
                     public void accept(KnowledgeListResult dataResult) throws Exception {
-                        mView.getKnowledgeListSuccess(dataResult.getData(),isRefresh);
+                        if (dataResult.getData().getDatas().size() != 0)
+                            mView.getKnowledgeListSuccess(dataResult.getData(),isRefresh);
+                        else
+                            mView.getKnowledgeListFail(dataResult.getErrorMsg());
                     }
                 }));
     }
