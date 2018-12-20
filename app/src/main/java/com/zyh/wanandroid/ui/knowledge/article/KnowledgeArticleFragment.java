@@ -27,7 +27,7 @@ import butterknife.Unbinder;
 /**
  * author : zyh
  * Date : 2018/12/18
- * Description :
+ * Description :知识文章
  */
 public class KnowledgeArticleFragment extends BaseMvpFragment<KnowledgeArticleFPresenter> implements KnowledgeArticleFConstract.view {
 

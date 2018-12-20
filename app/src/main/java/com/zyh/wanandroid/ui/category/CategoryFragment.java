@@ -27,7 +27,7 @@ import butterknife.Unbinder;
 /**
  * author : zyh
  * Date : 2018/11/30
- * Description :
+ * Description :项目分类
  */
 public class CategoryFragment extends BaseMvpFragment<CategoryFPresenter> implements CategoryFConstract.view {
 
@@ -36,6 +36,7 @@ public class CategoryFragment extends BaseMvpFragment<CategoryFPresenter> implem
     TabLayout tabLayout;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
+    private ArrayList<String> titleList = new ArrayList<>();
     private ArrayList<Integer> idList = new ArrayList<>();
 
     @Inject
@@ -60,10 +61,10 @@ public class CategoryFragment extends BaseMvpFragment<CategoryFPresenter> implem
     @Override
     public void getCategorySuccess(@NotNull List<? extends CategoryResult.DataBean> dataResult) {
         for (int i = 0; i < dataResult.size(); i++){
-            tabLayout.addTab(tabLayout.newTab().setText(dataResult.get(i).getName()));
+            titleList.add(dataResult.get(i).getName());
             idList.add(dataResult.get(i).getId());
         }
-        FPagerAdapter fPagerAdapter = new FPagerAdapter(getChildFragmentManager(),idList);
+        FPagerAdapter fPagerAdapter = new FPagerAdapter(getChildFragmentManager(),titleList,idList);
         viewPager.setAdapter(fPagerAdapter);
     }
 

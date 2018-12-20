@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.common.base.BaseMvpFragment;
+import com.common.util.ToastUtils;
 import com.just.agentweb.AgentWeb;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
@@ -92,12 +93,12 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
                 if (!agentWeb.back()){
                     pop();
                 }
-
                 break;
             case R.id.iv_close:
                 pop();
                 break;
             case R.id.iv_other:
+                ToastUtils.showShortToast("未完待续...");
                 break;
         }
     }

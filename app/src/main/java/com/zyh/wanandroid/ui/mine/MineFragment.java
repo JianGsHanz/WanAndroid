@@ -89,14 +89,20 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
                 String userName = PrefsUtils.getInstance().getString("userName", "");
                 if (TextUtils.isEmpty(userName))
                     ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), REQUEST_CODE);
+                else
+                    ToastUtils.showShortToast("未完待续...");
                 break;
             case R.id.tv_knowledge:
+                ToastUtils.showShortToast("未完待续...");
                 break;
             case R.id.tv_todo:
+                ToastUtils.showShortToast("未完待续...");
                 break;
             case R.id.tv_update:
+                ToastUtils.showShortToast("未完待续...");
                 break;
             case R.id.tv_about:
+                ToastUtils.showShortToast("未完待续...");
                 break;
             case R.id.tv_logout:
                 mPresenter.logout();

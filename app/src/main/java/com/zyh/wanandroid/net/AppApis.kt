@@ -64,4 +64,10 @@ interface AppApis{
      */
     @GET("project/tree/json")
     fun getCategory() : Observable<CategoryResult>
+    /**
+     * 项目分类列表
+     */
+    @GET("project/list/{page}/json")
+    fun getCategoryList(@Path("page")page : Int,
+                        @Query("cid")cid : Int) : Observable<CategoryListResult>
 }

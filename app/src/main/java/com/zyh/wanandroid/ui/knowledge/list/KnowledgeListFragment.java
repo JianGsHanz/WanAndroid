@@ -32,6 +32,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * author : zyh
+ * Date : 2018/11/30
+ * Description :知识文章列表
+ */
 public class KnowledgeListFragment extends BaseMvpFragment<KnowledgeListFPresenter> implements KnowledgeListConstract.view, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R.id.knowledge_rv)
     RecyclerView knowledgeRv;
@@ -77,7 +82,7 @@ public class KnowledgeListFragment extends BaseMvpFragment<KnowledgeListFPresent
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 KnowledgeListResult.DataBean.DatasBean data = (KnowledgeListResult.DataBean.DatasBean) adapter.getData().get(position);
                 ((KnowledgeArticleFragment)getParentFragment()).start(WebFragment.newInstance(
-                        data.getLink(),data.getTitle(),data.getId()),-1);
+                        data.getLink(),data.getTitle(),data.getId()));
             }
         });
     }
