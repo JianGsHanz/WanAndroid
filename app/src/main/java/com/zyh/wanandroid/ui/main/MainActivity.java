@@ -8,6 +8,7 @@ import com.common.base.BaseActivity;
 import com.common.base.IBaseMvpActivity;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
+import com.zyh.wanandroid.ui.LBaseActivity;
 
 import javax.inject.Inject;
 
@@ -16,7 +17,7 @@ import javax.inject.Inject;
  * Date : 2018/11/30
  * Description :
  */
-public class MainActivity extends BaseActivity implements IBaseMvpActivity<MainPresenter>, MainContract.view {
+public class MainActivity extends LBaseActivity implements IBaseMvpActivity<MainPresenter>, MainContract.view {
 
 
     @Inject

@@ -1,6 +1,7 @@
 package com.zyh.wanandroid.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
@@ -9,6 +10,7 @@ import android.widget.Toast
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.common.base.BaseActivity
+import com.common.util.StatusBarsUtil
 import com.zyh.wanandroid.App
 import com.zyh.wanandroid.R
 import java.util.*
@@ -62,15 +64,9 @@ abstract class LBaseActivity : BaseActivity(){
     /**
      * 沉浸状态栏
      */
-    fun steepStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            // 透明状态栏
-            window.addFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            // 透明导航栏
-            window.addFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-        }
+    private fun steepStatusBar() {
+        if (StatusBarsUtil.setStatusBarDarkTheme(this,true))
+            StatusBarsUtil.setStatusBarColor(this, Color.WHITE)
     }
 
     override fun onDestroy() {
