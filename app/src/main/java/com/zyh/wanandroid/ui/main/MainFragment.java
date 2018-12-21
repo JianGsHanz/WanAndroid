@@ -1,7 +1,6 @@
 package com.zyh.wanandroid.ui.main;
 
 import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,15 +12,18 @@ import android.widget.TextView;
 import com.common.base.BaseFragment;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
-import com.zyh.wanandroid.ui.knowledge.knowledgeFragment;
+import com.zyh.wanandroid.ui.MsgEvent;
 import com.zyh.wanandroid.ui.category.CategoryFragment;
 import com.zyh.wanandroid.ui.home.HomeFragment;
+import com.zyh.wanandroid.ui.knowledge.knowledgeFragment;
 import com.zyh.wanandroid.ui.mine.MineFragment;
 import com.zyh.wanandroid.ui.navigation.NavigationFragment;
 import com.zyh.wanandroid.utils.view.BottomBar;
 import com.zyh.wanandroid.utils.view.BottomBarTab;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
@@ -91,7 +93,6 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
 
     @Override
     protected void initViewAndEvent() {
-        fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorTransparent)));
 
         bottomBar
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_home, "首页"))
@@ -141,18 +142,12 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
         });
 
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(MsgEvent msgEvent){
+        if ((int)msgEvent.getO() == 1)
+            fab.animate().scaleX(1F).scaleY(1F).setDuration(500).start();
+        else
+            fab.animate().scaleX(0F).scaleY(0F).setDuration(500).start();
     }
 
     @OnClick(R.id.fab)
@@ -171,5 +166,19 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
     public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
         super.onFragmentResult(requestCode, resultCode, data);
 
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        EventBus.getDefault().register(this);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 }

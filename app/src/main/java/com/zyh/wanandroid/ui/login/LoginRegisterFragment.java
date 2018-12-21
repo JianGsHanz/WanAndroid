@@ -149,7 +149,7 @@ public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresent
     @Override
     public void loginRegisterSuccess(@NotNull UserResult userResult) {
         PrefsUtils.getInstance().putString("userName", userResult.getUsername());
-        EventBus.getDefault().post(new MsgEvent(userResult.getUsername()));
+        EventBus.getDefault().post("isLogin");
         _mActivity.onBackPressed();
     }
 

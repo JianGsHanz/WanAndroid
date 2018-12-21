@@ -1,7 +1,10 @@
 package com.zyh.wanandroid.ui.home;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +23,7 @@ import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.BannerResult;
 import com.zyh.wanandroid.model.HomeResult;
+import com.zyh.wanandroid.ui.MsgEvent;
 import com.zyh.wanandroid.ui.home.adapter.HomeRvAdapter;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;
@@ -75,6 +79,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
         App.getInstance().getFragmentComponent().inject(this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initViewAndEvent() {
 
@@ -96,6 +101,16 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
         homeSwipeLayout.setOnRefreshListener(this);
         homeRvAdapter.setOnLoadMoreListener(this);
         homeRvAdapter.setOnItemClickListener(this);
+        homeRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+               if (dy == 0){
+                    EventBus.getDefault().post(new MsgEvent(0));
+                }else if (dy < 0){
+                   EventBus.getDefault().post(new MsgEvent(1));
+               }
+            }
+        });
     }
 
     @Override
@@ -142,6 +157,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
 
     @Override
     public void onRefresh() {
+        EventBus.getDefault().post(new MsgEvent(0));
         homeSwipeLayout.setRefreshing(true);
         mPresenter.autoRefresh();
     }
@@ -154,6 +170,8 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(String o){
+        EventBus.getDefault().post(new MsgEvent(0));
+        if (o.equals("event"))
         homeRecyclerView.scrollToPosition(0);
     }
 
@@ -178,4 +196,5 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
         EventBus.getDefault().unregister(this);
         unbinder.unbind();
     }
+
 }

@@ -136,7 +136,8 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvents(MsgEvent msgEvent){
+    public void onEvent(String o){
+        if (o.equals("isLogin"))
         isLogin();
     }
     @Override
