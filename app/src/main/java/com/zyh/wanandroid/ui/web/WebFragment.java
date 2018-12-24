@@ -1,5 +1,6 @@
 package com.zyh.wanandroid.ui.web;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
@@ -12,10 +13,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.common.base.BaseMvpFragment;
-import com.common.util.ToastUtils;
 import com.just.agentweb.AgentWeb;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
+import com.zyh.wanandroid.utils.view.BottomDialog;
 
 import javax.inject.Inject;
 
@@ -68,7 +69,7 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
         }
         agentWeb = AgentWeb.with(this)
                 .setAgentWebParent(webLayout, new ConstraintLayout.LayoutParams(-1, -1))
-                 .useDefaultIndicator()
+                 .useDefaultIndicator(Color.BLACK)
                  .setWebChromeClient(webChromeClient)
                 .createAgentWeb()//
                 .ready()
@@ -98,7 +99,8 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
                 pop();
                 break;
             case R.id.iv_other:
-                ToastUtils.showShortToast("未完待续...");
+                BottomDialog bottomDialog = BottomDialog.newInstance();
+                bottomDialog.show(getChildFragmentManager(),"bottomDialog");
                 break;
         }
     }

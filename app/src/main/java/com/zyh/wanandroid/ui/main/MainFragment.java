@@ -108,7 +108,7 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
                 switch (position) {
                     case 0:
                         titleName.setText("首页");
-                        fab.setVisibility(View.VISIBLE);
+                        fab.setVisibility(View.GONE);
                         break;
                     case 1:
                         titleName.setText("导航");
@@ -142,12 +142,15 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
         });
 
     }
+    @SuppressLint("RestrictedApi")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(MsgEvent msgEvent){
-        if ((int)msgEvent.getO() == 1)
+        if ((int)msgEvent.getO() == 1) {
+            fab.setVisibility(View.VISIBLE);
             fab.animate().scaleX(1F).scaleY(1F).setDuration(500).start();
-        else
+        }else {
             fab.animate().scaleX(0F).scaleY(0F).setDuration(500).start();
+        }
     }
 
     @OnClick(R.id.fab)

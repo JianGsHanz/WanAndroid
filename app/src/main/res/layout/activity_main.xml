@@ -24,6 +24,7 @@
         app:borderWidth="0dp"
         android:backgroundTint="@color/colorWhite"
         app:layout_anchorGravity="center"
+        android:visibility="gone"
         android:src="@drawable/vector_drawable_cat"
         app:rippleColor="@color/colorAccent"
         app:layout_behavior="@string/float_button"/>
