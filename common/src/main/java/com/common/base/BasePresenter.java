@@ -8,5 +8,5 @@ public interface BasePresenter {
 
     void loadData();
 
-    void releaseData();
+//    void releaseData();
 }

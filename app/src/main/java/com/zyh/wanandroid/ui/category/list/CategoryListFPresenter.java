@@ -57,9 +57,5 @@ public class CategoryListFPresenter extends AbsBasePresenter<CategoryListConstra
 
     }
 
-    @Override
-    public void releaseData() {
-
-    }
 
 }

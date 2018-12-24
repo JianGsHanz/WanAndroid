@@ -68,10 +68,6 @@ public class HomeFPresenter extends AbsBasePresenter<HomeFConstract.view> implem
                 }));
     }
 
-    @Override
-    public void releaseData() {
-
-    }
 
 
 }

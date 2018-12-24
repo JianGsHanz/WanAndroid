@@ -34,8 +34,4 @@ public class SplashPresenter extends AbsBasePresenter<SplashContract.view> imple
                 }));
     }
 
-    @Override
-    public void releaseData() {
-
-    }
 }

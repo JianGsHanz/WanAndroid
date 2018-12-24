@@ -36,8 +36,4 @@ public class NavigationFPresenter extends AbsBasePresenter<NavigationConstract.v
         }));
     }
 
-    @Override
-    public void releaseData() {
-
-    }
 }

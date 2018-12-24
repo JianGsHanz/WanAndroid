@@ -36,8 +36,4 @@ public class knowledgeFPresenter extends AbsBasePresenter<knowledgeFConstract.vi
         }));
     }
 
-    @Override
-    public void releaseData() {
-
-    }
 }

@@ -36,8 +36,4 @@ public class CategoryFPresenter extends AbsBasePresenter<CategoryFConstract.view
 
     }
 
-    @Override
-    public void releaseData() {
-
-    }
 }

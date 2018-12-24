@@ -13,9 +13,4 @@ public class KnowledgeArticleFPresenter extends AbsBasePresenter<KnowledgeArticl
     @Inject
     public KnowledgeArticleFPresenter() {
     }
-
-    @Override
-    public void releaseData() {
-
-    }
 }

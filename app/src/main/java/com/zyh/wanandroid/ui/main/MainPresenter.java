@@ -13,8 +13,4 @@ public class MainPresenter extends AbsBasePresenter<MainContract.view> implement
     @Inject
     public MainPresenter(){}
 
-    @Override
-    public void releaseData() {
-
-    }
 }

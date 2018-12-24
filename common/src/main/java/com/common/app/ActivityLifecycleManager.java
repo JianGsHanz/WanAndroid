@@ -78,10 +78,10 @@ public final class ActivityLifecycleManager implements Application.ActivityLifec
 
     @Override
     public void onActivityStopped(Activity activity) {
-        if (activity instanceof IBaseMvpActivity) {
-            IBaseMvpActivity mvpActivity = (IBaseMvpActivity) activity;
-            mvpActivity.getPresenter().releaseData();
-        }
+//        if (activity instanceof IBaseMvpActivity) {
+//            IBaseMvpActivity mvpActivity = (IBaseMvpActivity) activity;
+//            mvpActivity.getPresenter().releaseData();
+//        }
     }
 
     @Override

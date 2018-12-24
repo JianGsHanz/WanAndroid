@@ -24,11 +24,6 @@ public class LoginRegisterFPresenter extends AbsBasePresenter<LoginRegisterFCons
     }
 
     @Override
-    public void releaseData() {
-
-    }
-
-    @Override
     public void requestLogin(@NotNull String userName, @NotNull String password) {
         registerRx(appApis.login(userName,password)
         .compose(RxUtils.<BaseResult<UserResult>>rxSchedulerHelpe())

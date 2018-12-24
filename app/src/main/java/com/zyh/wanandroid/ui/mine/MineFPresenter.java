@@ -22,10 +22,6 @@ public class MineFPresenter extends AbsBasePresenter<MineFConstract.view> implem
     public MineFPresenter(AppApis appApis){
         this.appApis = appApis;
     }
-    @Override
-    public void releaseData() {
-
-    }
 
     @Override
     public void logout() {

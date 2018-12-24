@@ -48,10 +48,5 @@ public class KnowledgeListFPresenter extends AbsBasePresenter<KnowledgeListConst
                     }
                 }));
     }
-    @Override
-    public void releaseData() {
-
-    }
-
 
 }

@@ -8,8 +8,4 @@ public class WebFPresenter extends AbsBasePresenter<WebFContract.view> implement
 
     @Inject
     public WebFPresenter(){}
-    @Override
-    public void releaseData() {
-
-    }
 }
