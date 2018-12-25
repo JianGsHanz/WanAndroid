@@ -16,7 +16,6 @@ import com.common.base.BaseMvpFragment;
 import com.just.agentweb.AgentWeb;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
-import com.zyh.wanandroid.utils.view.BottomDialog;
 
 import javax.inject.Inject;
 
@@ -99,7 +98,7 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
                 pop();
                 break;
             case R.id.iv_other:
-                BottomDialog bottomDialog = BottomDialog.newInstance();
+                BottomDialog bottomDialog = BottomDialog.newInstance(link,content);
                 bottomDialog.show(getChildFragmentManager(),"bottomDialog");
                 break;
         }

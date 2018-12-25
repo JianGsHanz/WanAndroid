@@ -1,5 +1,10 @@
-package com.zyh.wanandroid.utils.view;
+package com.zyh.wanandroid.ui.web;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
  * Time:2018/12/24
@@ -37,6 +43,8 @@ public class BottomDialog extends BottomSheetDialogFragment {
     @BindView(R.id.tv_cancel)
     TextView tvCancel;
     Unbinder unbinder;
+    private String url;
+    private String content;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +57,9 @@ public class BottomDialog extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bottom_dialog, container, false);
         unbinder = ButterKnife.bind(this, view);
+        Bundle bundle = getArguments();
+        url = bundle.getString("url", "www.wanandroid.com");
+        content = bundle.getString("content", "WanAndroid");
         return view;
     }
 
@@ -65,23 +76,61 @@ public class BottomDialog extends BottomSheetDialogFragment {
         switch (view.getId()) {
             case R.id.tv_share:
                 ToastUtils.showShortToast("分享");
+                share();
                 break;
             case R.id.tv_collect:
                 ToastUtils.showShortToast("收藏");
                 break;
             case R.id.tv_copy:
-                ToastUtils.showShortToast("复制链接");
+                copyUrl();
                 break;
             case R.id.tv_browser:
-                ToastUtils.showShortToast("打开浏览器");
+                openBrowser();
                 break;
             case R.id.tv_cancel:
-                ToastUtils.showShortToast("取消");
+                dismiss();
                 break;
         }
     }
-    public static BottomDialog newInstance(){
+
+    private void share() {
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        // title标题，微信、QQ和QQ空间等平台使用
+        oks.setTitle("来自WanAndroid");
+        // titleUrl QQ和QQ空间跳转链接
+        oks.setTitleUrl(url);
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText(content);
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+//        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url在微信、微博，Facebook等平台中使用
+        oks.setUrl(url);
+        // 启动分享GUI
+        oks.show(getActivity());
+    }
+
+    private void openBrowser() {
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
+    private void copyUrl() {
+        ClipboardManager cm = (ClipboardManager) getActivity()
+                        .getSystemService(Context.CLIPBOARD_SERVICE);
+        cm.setPrimaryClip(ClipData.newPlainText(null, url));
+        ToastUtils.showShortToast("复制成功");
+    }
+
+    public static BottomDialog newInstance(String url,String content){
         BottomDialog bottomDialog = new BottomDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString("url",url);
+        bundle.putString("content",content);
+        bottomDialog.setArguments(bundle);
         return bottomDialog;
     }
     @Override
