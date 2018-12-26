@@ -82,7 +82,7 @@ public class KnowledgeListFragment extends BaseMvpFragment<KnowledgeListFPresent
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 KnowledgeListResult.DataBean.DatasBean data = (KnowledgeListResult.DataBean.DatasBean) adapter.getData().get(position);
                 ((KnowledgeArticleFragment)getParentFragment()).start(WebFragment.newInstance(
-                        data.getLink(),data.getTitle(),data.getId()));
+                        data.getLink(),data.getTitle(),data.getId(),data.isCollect()));
             }
         });
     }

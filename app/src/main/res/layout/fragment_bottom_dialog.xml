@@ -28,7 +28,6 @@
         android:drawablePadding="@dimen/d_5"
         android:drawableTop="@mipmap/ic_collect_tag"
         android:gravity="center"
-        android:text="收藏"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/sp14"
         android:layout_marginTop="@dimen/d_20"

@@ -90,10 +90,9 @@ public class CategoryListFragment extends BaseMvpFragment<CategoryListFPresenter
         categoryListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                LogUtils.e("position ==" + position);
                 ((MainFragment) getParentFragment().getParentFragment())
                         .goFragment(WebFragment.newInstance(dataList.get(position).getLink(),
-                                dataList.get(position).getTitle(), dataList.get(position).getId()),-1);
+                                dataList.get(position).getTitle(), dataList.get(position).getId(),dataList.get(position).isCollect()),-1);
 
             }
         });

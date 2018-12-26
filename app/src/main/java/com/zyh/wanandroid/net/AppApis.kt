@@ -70,4 +70,9 @@ interface AppApis{
     @GET("project/list/{page}/json")
     fun getCategoryList(@Path("page")page : Int,
                         @Query("cid")cid : Int) : Observable<CategoryListResult>
+    /**
+     * 收藏
+     */
+    @POST("lg/collect/{id}/json")
+    fun collect(@Path("id")id : Int) : Observable<BaseResult<String>>
 }

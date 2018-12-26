@@ -137,7 +137,8 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
             @Override
             public void OnBannerClick(int position) {
                 BannerResult datas = listBaseResult.get(position);
-                ((MainFragment) getParentFragment()).goFragment(WebFragment.newInstance(datas.getUrl(),datas.getTitle(),datas.getId()),-1);
+                ((MainFragment) getParentFragment()).goFragment(WebFragment.newInstance(datas.getUrl(),
+                        datas.getTitle(),-1,false),-1);
             }
         });
 
@@ -178,7 +179,8 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         HomeResult.DatasBean datas = (HomeResult.DatasBean) adapter.getData().get(position);
-        ((MainFragment) getParentFragment()).goFragment(WebFragment.newInstance(datas.getLink(),datas.getTitle(),datas.getId()),-1);
+        ((MainFragment) getParentFragment()).goFragment(WebFragment.newInstance(datas.getLink(),
+                datas.getTitle(),datas.getId(),datas.isCollect()),-1);
     }
 
 

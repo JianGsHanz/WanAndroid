@@ -54,6 +54,7 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
     private List<Integer> idList = new ArrayList<>();
     private LeftAdapter leftAdapter;
     private NavigationResult navigationResult;
+    private List<NavigationResult.DataBean.ArticlesBean> articles;
 
     @Inject
     public NavigationFragment() {
@@ -86,7 +87,7 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
     }
 
     private void setFlowLayout(int position) {
-        List<NavigationResult.DataBean.ArticlesBean> articles = navigationResult.getData().get(position).getArticles();
+        articles = navigationResult.getData().get(position).getArticles();
         titleList.clear();
         for (int i = 0; i < articles.size(); i++) {
             titleList.add(articles.get(i).getTitle());
@@ -106,7 +107,10 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
         rightFl.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-                ((MainFragment)getParentFragment()).goFragment(WebFragment.newInstance(urlList.get(position),titleList.get(position),idList.get(position)),-1);
+//                ((MainFragment)getParentFragment()).goFragment(WebFragment.newInstance(urlList.get(position),titleList.get(position),idList.get(position)),-1);
+                ((MainFragment)getParentFragment()).goFragment(WebFragment.newInstance(
+                        articles.get(position).getLink(),articles.get(position).getTitle(),
+                        articles.get(position).getId(),articles.get(position).isCollect()),-1);
                 return true;
             }
         });
