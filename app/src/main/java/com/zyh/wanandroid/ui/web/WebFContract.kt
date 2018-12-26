@@ -6,8 +6,11 @@ import com.common.base.BaseView
 interface WebFContract{
     interface view : BaseView {
         fun onCollectSuccess()
+        fun unCollectSuccess()
     }
     interface presenter : BasePresenter {
         fun articleCollect(id : Int)
+        fun unArticleCollect(id : Int)
+        fun unCollectPage(id: Int,originId :Int)
     }
 }

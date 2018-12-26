@@ -30,4 +30,30 @@ public class WebFPresenter extends AbsBasePresenter<WebFContract.view> implement
             }
         }));
     }
+
+    @Override
+    public void unArticleCollect(int id) {
+        registerRx(appApis.unCollect(id)
+        .compose(RxUtils.<BaseResult<String>>rxSchedulerHelpe())
+        .subscribe(new Consumer<BaseResult<String>>() {
+            @Override
+            public void accept(BaseResult<String> result) throws Exception {
+                if (result.getErrorCode() == 0)
+                    mView.unCollectSuccess();
+            }
+        }));
+    }
+
+    @Override
+    public void unCollectPage(int id, int originId) {
+        registerRx(appApis.unCollectPage(id,originId)
+                .compose(RxUtils.<BaseResult<String>>rxSchedulerHelpe())
+                .subscribe(new Consumer<BaseResult<String>>() {
+                    @Override
+                    public void accept(BaseResult<String> result) throws Exception {
+                        if (result.getErrorCode() == 0)
+                            mView.unCollectSuccess();
+                    }
+                }));
+    }
 }

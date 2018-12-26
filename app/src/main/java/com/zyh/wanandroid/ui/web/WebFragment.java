@@ -24,6 +24,10 @@ import com.common.util.ToastUtils;
 import com.just.agentweb.AgentWeb;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
+import com.zyh.wanandroid.ui.CollectEvent;
+import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
@@ -49,6 +53,7 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
     private static final String CONTENT = "content";
     private static final String ARTICLEID = "articleId";
     private static final String COLLECT = "collect";
+    private static final String ORIGINID = "originId";
 
     private String link,content;
 
@@ -56,6 +61,7 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
     private AgentWeb agentWeb;
     private boolean collect;
     private BottomDialog bottomDialog;
+    private int originId;
 
     @Inject
     public WebFragment(){}
@@ -95,7 +101,7 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
         content = bundle.getString(CONTENT);
         articleId = bundle.getInt(ARTICLEID);
         collect = bundle.getBoolean(COLLECT, false);
-
+        originId = bundle.getInt(ORIGINID);
         return rootView;
     }
 
@@ -125,21 +131,6 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
     }
 
     private WebChromeClient webChromeClient = new WebChromeClient(){
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
-            super.onProgressChanged(view, newProgress);
-            if (newProgress >= 100){
-                progressBar.setVisibility(View.GONE);
-                if (view.canGoBack())
-                    ivClose.setVisibility(View.VISIBLE);
-                else
-                    ivClose.setVisibility(View.GONE);
-            }else{
-                if (progressBar.getVisibility() == View.GONE)
-                progressBar.setVisibility(View.VISIBLE);
-                progressBar.setProgress(newProgress);
-            }
-        }
 
         @Override
         public void onReceivedTitle(WebView view, String title) {
@@ -163,9 +154,17 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
                 if (!TextUtils.isEmpty(PrefsUtils.getInstance().getString("userName"))) {
                     if (!collect) {
                         mPresenter.articleCollect(articleId);
+                    }else{
+                        if (originId > 0) //大于0说明是{文章列表}的收藏 否则是{收藏页面}的
+                            mPresenter.unArticleCollect(articleId);
+                        else
+                            mPresenter.unCollectPage(articleId,originId);
                     }
-                }else
+                }else {
                     ToastUtils.showShortToast("请先登录！");
+                    start(LoginRegisterFragment.newInstance());
+                }
+
             }
 
             @Override
@@ -211,21 +210,28 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
         cm.setPrimaryClip(ClipData.newPlainText(null, link));
         ToastUtils.showShortToast("复制成功");
     }
-
+    //收藏成功
     @Override
     public void onCollectSuccess() {
         ToastUtils.showShortToast("收藏成功");
         collect = true;
-        bottomDialog.collectUrl(collect);
+        EventBus.getDefault().post(new CollectEvent(articleId,collect));
     }
-
-    public static WebFragment newInstance(String url, String content, int id,boolean collect) {
+    //取消收藏
+    @Override
+    public void unCollectSuccess() {
+        ToastUtils.showShortToast("取消收藏");
+        collect = false;
+        EventBus.getDefault().post(new CollectEvent(articleId,collect));
+    }
+    public static WebFragment newInstance(String url, String content, int id,boolean collect,int originId) {
         WebFragment fragment = new WebFragment();
         Bundle args = new Bundle();
         args.putString(URL, url);
         args.putString(CONTENT, content);
         args.putInt(ARTICLEID,id);
         args.putBoolean(COLLECT,collect);
+        args.putInt(ORIGINID,originId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -235,5 +241,4 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
         super.onDestroy();
         agentWeb.getWebLifeCycle().onDestroy();
     }
-
 }

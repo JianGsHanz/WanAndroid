@@ -37,7 +37,6 @@ public class BottomDialog extends BottomSheetDialogFragment {
     TextView tvCancel;
     Unbinder unbinder;
     private boolean collect;
-    private boolean isSelect;
     private OnDialogClickListener onClickListener;
 
     @Override
@@ -65,37 +64,29 @@ public class BottomDialog extends BottomSheetDialogFragment {
     @OnClick({R.id.tv_share, R.id.tv_collect, R.id.tv_copy, R.id.tv_browser, R.id.tv_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_share:
+            case R.id.tv_share: //分享
                 onClickListener.onShare();
                 break;
-            case R.id.tv_collect:
+            case R.id.tv_collect: //收藏
                 onClickListener.onCollect();
-//                if (isSelect){
-//                    isSelect = false;
-//                    tvCollect.setText("取消收藏");
-//                }else {
-//                    isSelect = true;
-//                    tvCollect.setText("收藏");
-//                }
                 break;
-            case R.id.tv_copy:
+            case R.id.tv_copy: //复制链接
                 onClickListener.onCopy();
                 break;
-            case R.id.tv_browser:
+            case R.id.tv_browser: //打开浏览器
                 onClickListener.onBrowser();
                 break;
             case R.id.tv_cancel:
-                dismiss();
+
                 break;
         }
+        dismiss();
     }
 
     public void collectUrl(boolean collect) {
         if (collect){
-            isSelect = true;
             tvCollect.setText("取消收藏");
         }else {
-            isSelect = false;
             tvCollect.setText("收藏");
         }
     }

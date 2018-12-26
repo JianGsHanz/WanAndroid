@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
+import com.common.util.LogUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -23,6 +24,7 @@ import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.BannerResult;
 import com.zyh.wanandroid.model.HomeResult;
+import com.zyh.wanandroid.ui.CollectEvent;
 import com.zyh.wanandroid.ui.MsgEvent;
 import com.zyh.wanandroid.ui.home.adapter.HomeRvAdapter;
 import com.zyh.wanandroid.ui.main.MainFragment;
@@ -138,7 +140,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
             public void OnBannerClick(int position) {
                 BannerResult datas = listBaseResult.get(position);
                 ((MainFragment) getParentFragment()).goFragment(WebFragment.newInstance(datas.getUrl(),
-                        datas.getTitle(),-1,false),-1);
+                        datas.getTitle(),-1,false,-1),-1);
             }
         });
 
@@ -171,16 +173,29 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(String o){
-        EventBus.getDefault().post(new MsgEvent(0));
-        if (o.equals("event"))
-        homeRecyclerView.scrollToPosition(0);
+        if (o.equals("event")) {
+            EventBus.getDefault().post(new MsgEvent(0));
+            if (o.equals("event"))
+                homeRecyclerView.scrollToPosition(0);
+        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onCollect(CollectEvent collectEvent){
+
+        for (int i = 0; i < homeResult.size() ; i++) {
+            if (homeResult.get(i).getId() == collectEvent.getId()){
+                homeResult.get(i).setCollect(collectEvent.isCollect());
+            }
+        }
+        homeRvAdapter.notifyDataSetChanged();
+    }
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         HomeResult.DatasBean datas = (HomeResult.DatasBean) adapter.getData().get(position);
         ((MainFragment) getParentFragment()).goFragment(WebFragment.newInstance(datas.getLink(),
-                datas.getTitle(),datas.getId(),datas.isCollect()),-1);
+                datas.getTitle(),datas.getId(),datas.isCollect(),-1),-1);
     }
 
 

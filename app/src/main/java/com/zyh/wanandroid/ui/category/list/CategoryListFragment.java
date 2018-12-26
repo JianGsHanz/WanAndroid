@@ -11,16 +11,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
-import com.common.util.LogUtils;
 import com.common.util.ToastUtils;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.CategoryListResult;
-import com.zyh.wanandroid.ui.category.CategoryFragment;
 import com.zyh.wanandroid.ui.category.adapter.CategoryListAdapter;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;
@@ -92,7 +89,8 @@ public class CategoryListFragment extends BaseMvpFragment<CategoryListFPresenter
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ((MainFragment) getParentFragment().getParentFragment())
                         .goFragment(WebFragment.newInstance(dataList.get(position).getLink(),
-                                dataList.get(position).getTitle(), dataList.get(position).getId(),dataList.get(position).isCollect()),-1);
+                                dataList.get(position).getTitle(), dataList.get(position).getId(),
+                                dataList.get(position).isCollect(),-1),-1);
 
             }
         });

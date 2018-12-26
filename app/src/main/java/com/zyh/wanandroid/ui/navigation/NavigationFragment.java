@@ -3,17 +3,13 @@ package com.zyh.wanandroid.ui.navigation;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
-import com.common.util.LogUtils;
-import com.common.util.ToastUtils;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -28,7 +24,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -110,7 +105,7 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
 //                ((MainFragment)getParentFragment()).goFragment(WebFragment.newInstance(urlList.get(position),titleList.get(position),idList.get(position)),-1);
                 ((MainFragment)getParentFragment()).goFragment(WebFragment.newInstance(
                         articles.get(position).getLink(),articles.get(position).getTitle(),
-                        articles.get(position).getId(),articles.get(position).isCollect()),-1);
+                        articles.get(position).getId(),articles.get(position).isCollect(),-1),-1);
                 return true;
             }
         });
