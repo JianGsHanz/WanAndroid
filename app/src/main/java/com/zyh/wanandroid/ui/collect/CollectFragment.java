@@ -116,7 +116,7 @@ public class CollectFragment extends BaseMvpFragment<CollectFPresenter> implemen
         } else {
             list.addAll(data.getDatas());
             adapter.replaceData(list);
-            adapter.loadMoreEnd();
+            adapter.loadMoreComplete();
         }
     }
 
@@ -126,13 +126,15 @@ public class CollectFragment extends BaseMvpFragment<CollectFPresenter> implemen
             ToastUtils.showShortToast(error);
         }
         swipeLayout.setRefreshing(false);
-        adapter.loadMoreComplete();
+        adapter.loadMoreEnd();
 
     }
 
     @Override
     public void isEmptyLayout() {
-
+        swipeLayout.setRefreshing(false);
+        adapter.setEmptyView(getLayoutInflater()
+                .inflate(R.layout.empty_view, (ViewGroup) recyclerView.getParent(), false));
     }
 
     @Override
@@ -140,7 +142,7 @@ public class CollectFragment extends BaseMvpFragment<CollectFPresenter> implemen
         ToastUtils.showShortToast("身份过期，请重新登录");
         PrefsUtils.getInstance().remove("userName");
         EventBus.getDefault().post("loginOut");
-        start(LoginRegisterFragment.newInstance());
+        showHideFragment(LoginRegisterFragment.newInstance(),this);
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void unCollect(CollectEvent collectEvent){

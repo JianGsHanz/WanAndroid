@@ -15,7 +15,6 @@ import com.common.util.ToastUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
-import com.zyh.wanandroid.ui.MsgEvent;
 import com.zyh.wanandroid.ui.collect.CollectFragment;
 import com.zyh.wanandroid.ui.knowledge.article.KnowledgeArticleFragment;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
@@ -132,6 +131,7 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
         String userName = PrefsUtils.getInstance().getString("userName", "");
         if (TextUtils.isEmpty(userName)){
             tvLogout.setVisibility(View.GONE);
+            tvUserName.setText(userName);
             btLoginRegister.setVisibility(View.VISIBLE);
         }else {
             tvLogout.setVisibility(View.VISIBLE);

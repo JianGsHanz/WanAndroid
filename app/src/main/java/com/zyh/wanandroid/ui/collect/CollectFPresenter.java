@@ -2,7 +2,6 @@ package com.zyh.wanandroid.ui.collect;
 
 import com.common.base.AbsBasePresenter;
 import com.common.util.RxUtils;
-import com.zyh.wanandroid.model.BaseResult;
 import com.zyh.wanandroid.model.CollectResult;
 import com.zyh.wanandroid.net.AppApis;
 
@@ -45,14 +44,16 @@ public class CollectFPresenter extends AbsBasePresenter<CollectFConstract.view> 
         .subscribe(new Consumer<CollectResult>() {
             @Override
             public void accept(CollectResult collectResult) throws Exception {
-                if (collectResult.getData().getDatas().size() != 0) {
-                    mView.getCollectListSuccess(collectResult.getData(), isRefresh);
-                }else if (collectResult.getErrorCode() == -1001){
+                if (collectResult.getErrorCode() == -1001)
                     mView.unOverdue();
-                }else if (isRefresh && collectResult.getData().getDatas().size() == 0){
-                    mView.isEmptyLayout();
-                }else
+                else if (!isRefresh && collectResult.getData().getDatas().size() == 0)
                     mView.getCollectListFail(collectResult.getErrorMsg());
+                else if (collectResult.getData().getDatas().size() != 0)
+                    mView.getCollectListSuccess(collectResult.getData(), isRefresh);
+                else if (isRefresh && collectResult.getData().getDatas().size() == 0)
+                    mView.isEmptyLayout();
+
+
             }
         }));
     }
