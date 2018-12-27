@@ -40,6 +40,8 @@ public class WebFPresenter extends AbsBasePresenter<WebFContract.view> implement
             public void accept(BaseResult<String> result) throws Exception {
                 if (result.getErrorCode() == 0)
                     mView.unCollectSuccess();
+                if (result.getErrorCode() == -1001)
+                    mView.unOverdue();
             }
         }));
     }

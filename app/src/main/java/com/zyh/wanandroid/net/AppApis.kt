@@ -87,4 +87,9 @@ interface AppApis{
     @POST("lg/uncollect/{id}/json")
     fun unCollectPage(@Path("id")id :Int,
                       @Field("originId")originId :Int) : Observable<BaseResult<String>>
+    /**
+     * 收藏页面
+     */
+    @GET("lg/collect/list/{page}/json")
+    fun getCollectList(@Path("page")page : Int) : Observable<CollectResult>
 }

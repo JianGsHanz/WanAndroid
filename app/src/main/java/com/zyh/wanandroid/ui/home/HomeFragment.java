@@ -183,13 +183,14 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCollect(CollectEvent collectEvent){
-
-        for (int i = 0; i < homeResult.size() ; i++) {
-            if (homeResult.get(i).getId() == collectEvent.getId()){
-                homeResult.get(i).setCollect(collectEvent.isCollect());
+        if (collectEvent.getOrginId() < 0 ) {
+            for (int i = 0; i < homeResult.size(); i++) {
+                if (homeResult.get(i).getId() == collectEvent.getId()) {
+                    homeResult.get(i).setCollect(true);
+                }
             }
+            homeRvAdapter.notifyDataSetChanged();
         }
-        homeRvAdapter.notifyDataSetChanged();
     }
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

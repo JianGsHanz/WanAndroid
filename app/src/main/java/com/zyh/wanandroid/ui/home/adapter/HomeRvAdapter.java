@@ -1,5 +1,6 @@
 package com.zyh.wanandroid.ui.home.adapter;
 
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -43,9 +44,9 @@ public class HomeRvAdapter extends BaseQuickAdapter<HomeResult.DatasBean,HomeRvA
         helper.setText(R.id.tv_time,item.getNiceDate());
         ImageView iv_heart = (ImageView)helper.getView(R.id.iv_heart);
         if (item.isCollect())
-            iv_heart.setColorFilter(R.color.colorRed);
+            iv_heart.setColorFilter(Color.RED);
         else
-            iv_heart.setColorFilter(R.color.colorGray);
+            iv_heart.setColorFilter(Color.GRAY);
     }
 
     private String getChapterName(HomeResult.DatasBean item){

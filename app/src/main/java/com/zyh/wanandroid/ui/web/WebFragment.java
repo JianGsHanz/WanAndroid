@@ -28,13 +28,19 @@ import com.zyh.wanandroid.ui.CollectEvent;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.sharesdk.onekeyshare.OnekeyShare;
-
+/**
+ * author : zyh
+ * Date : 2018/12/3
+ * Description :所有web详情
+ */
 public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFContract.view {
 
     @BindView(R.id.iv_back)
@@ -96,6 +102,7 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        EventBus.getDefault().register(this);
         Bundle bundle = getArguments();
         link = bundle.getString(URL);
         content = bundle.getString(CONTENT);
@@ -215,14 +222,27 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
     public void onCollectSuccess() {
         ToastUtils.showShortToast("收藏成功");
         collect = true;
-        EventBus.getDefault().post(new CollectEvent(articleId,collect));
+        EventBus.getDefault().post(new CollectEvent(articleId,-1));
     }
     //取消收藏
     @Override
     public void unCollectSuccess() {
         ToastUtils.showShortToast("取消收藏");
         collect = false;
-        EventBus.getDefault().post(new CollectEvent(articleId,collect));
+        EventBus.getDefault().post(new CollectEvent(articleId,originId));
+    }
+    //身份过期
+    @Override
+    public void unOverdue() {
+        ToastUtils.showShortToast("身份过期，请重新登录");
+        PrefsUtils.getInstance().remove("userName");
+        EventBus.getDefault().post("loginOut");
+        start(LoginRegisterFragment.newInstance());
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(String o){
+        if (o.equals("login") && !collect)
+            mPresenter.articleCollect(articleId);
     }
     public static WebFragment newInstance(String url, String content, int id,boolean collect,int originId) {
         WebFragment fragment = new WebFragment();
@@ -239,6 +259,8 @@ public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFC
     @Override
     public void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         agentWeb.getWebLifeCycle().onDestroy();
     }
+
 }

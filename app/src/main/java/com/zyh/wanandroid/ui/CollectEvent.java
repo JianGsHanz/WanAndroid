@@ -7,11 +7,11 @@ package com.zyh.wanandroid.ui;
  */
 public class CollectEvent {
     private int id;
-    private boolean collect;
+    private int orginId;
 
-    public CollectEvent(int id, boolean collect) {
+    public CollectEvent(int id, int orginId) {
         this.id = id;
-        this.collect = collect;
+        this.orginId = orginId;
     }
 
     public int getId() {
@@ -22,11 +22,11 @@ public class CollectEvent {
         this.id = id;
     }
 
-    public boolean isCollect() {
-        return collect;
+    public int getOrginId() {
+        return orginId;
     }
 
-    public void setCollect(boolean collect) {
-        this.collect = collect;
+    public void setOrginId(int orginId) {
+        this.orginId = orginId;
     }
 }

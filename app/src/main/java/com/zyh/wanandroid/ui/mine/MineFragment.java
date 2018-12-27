@@ -16,6 +16,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.ui.MsgEvent;
+import com.zyh.wanandroid.ui.collect.CollectFragment;
+import com.zyh.wanandroid.ui.knowledge.article.KnowledgeArticleFragment;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.utils.view.CustomSettingLayout;
@@ -58,6 +60,10 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     private static final int REQUEST_CODE = 0;
     @BindView(R.id.tv_logout)
     TextView tvLogout;
+    @Inject
+    CollectFragment collectFragment;
+    @Inject
+    KnowledgeArticleFragment knowledgeArticleFragment;
 
     @Inject
     public MineFragment() {
@@ -83,17 +89,16 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_login_register:
-                ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), REQUEST_CODE);
+                ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), -1);
                 break;
             case R.id.tv_collect:
                 String userName = PrefsUtils.getInstance().getString("userName", "");
                 if (TextUtils.isEmpty(userName))
-                    ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), REQUEST_CODE);
+                    ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), -1);
                 else
-                    ToastUtils.showShortToast("未完待续...");
+                    ((MainFragment) getParentFragment()).goFragment(collectFragment,-1);
                 break;
             case R.id.tv_knowledge:
-                ToastUtils.showShortToast("未完待续...");
                 break;
             case R.id.tv_todo:
                 ToastUtils.showShortToast("未完待续...");
@@ -137,7 +142,7 @@ public class MineFragment extends BaseMvpFragment<MineFPresenter> implements Min
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(String o){
-        if (o.equals("isLogin"))
+        if (o.equals("login")||o.equals("loginOut"))
         isLogin();
     }
     @Override

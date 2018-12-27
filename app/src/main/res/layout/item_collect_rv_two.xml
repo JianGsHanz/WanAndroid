@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/iv_pic_collect">
+        <TextView
+            android:id="@+id/tv_head_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/d_8"
+            android:layout_marginLeft="@dimen/d_10"
+            android:layout_marginTop="@dimen/d_5"
+            android:background="@drawable/shape_head_red"
+            android:gravity="center"
+            android:text="M"
+            android:textSize="@dimen/sp12"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_head_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:textSize="@dimen/sp12"
+            android:layout_marginLeft="@dimen/d_5"
+            app:layout_constraintBottom_toBottomOf="@id/tv_head_color"
+            app:layout_constraintLeft_toRightOf="@id/tv_head_color"
+            app:layout_constraintTop_toTopOf="@id/tv_head_color" />
+
+        <TextView
+            android:id="@+id/tv_head_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="type"
+            android:layout_marginRight="@dimen/d_10"
+            android:textSize="@dimen/sp12"
+            app:layout_constraintBottom_toBottomOf="@id/tv_head_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_head_name" />
+
+        <TextView
+            android:id="@+id/tv_title_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/d_5"
+            android:padding="@dimen/d_5"
+            android:singleLine="true"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_head_color" />
+
+        <TextView
+            android:id="@+id/tv_title_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/d_5"
+            android:layout_marginLeft="@dimen/d_5"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:text="https://mp.weixin.qq.com/s/YF5LEKSaKEYGTFas9uF3-Q"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/sp16"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_content" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/d_8"
+            android:layout_marginRight="@dimen/d_10"
+            android:text="18-09-13"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/sp12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+             />
+
+        <ImageView
+            android:id="@+id/iv_heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/d_10"
+            android:src="@mipmap/ic_heart"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_time"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_time" />
+    </android.support.constraint.ConstraintLayout>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/iv_pic_collect"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintWidth_default="percent"
+        fresco:roundedCornerRadius="5dp"
+        fresco:roundTopLeft="true"
+        fresco:roundTopRight="true"
+        fresco:roundBottomLeft="true"
+        fresco:roundBottomRight="true"
+        fresco:roundingBorderWidth="0.5dp"
+        fresco:roundingBorderColor="@color/colorBlack"
+        fresco:fadeDuration="300"
+        />
+</android.support.constraint.ConstraintLayout>

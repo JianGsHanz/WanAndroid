@@ -7,6 +7,7 @@ interface WebFContract{
     interface view : BaseView {
         fun onCollectSuccess()
         fun unCollectSuccess()
+        fun unOverdue()
     }
     interface presenter : BasePresenter {
         fun articleCollect(id : Int)

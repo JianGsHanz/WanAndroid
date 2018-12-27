@@ -4,6 +4,7 @@ import com.zyh.wanandroid.di.module.FragmentModule;
 import com.zyh.wanandroid.di.scope.PerFragment;
 import com.zyh.wanandroid.ui.category.CategoryFragment;
 import com.zyh.wanandroid.ui.category.list.CategoryListFragment;
+import com.zyh.wanandroid.ui.collect.CollectFragment;
 import com.zyh.wanandroid.ui.home.HomeFragment;
 import com.zyh.wanandroid.ui.knowledge.article.KnowledgeArticleFragment;
 import com.zyh.wanandroid.ui.knowledge.knowledgeFragment;
@@ -35,4 +36,5 @@ public interface FragmentComponent {
     void inject(KnowledgeArticleFragment knowledgeArticleFragment);
     void inject(KnowledgeListFragment knowledgeListFragment);
     void inject(CategoryListFragment categoryListFragment);
+    void inject(CollectFragment collectFragment);
 }
