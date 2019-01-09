@@ -20,6 +20,22 @@
         <item name="android:windowIsTranslucent">true</item>/
         <!--<item name="android:windowDisablePreview">true</item>-->
     </style>
+
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!--&lt;!&ndash;边框&ndash;&gt;-->
+        <item name="android:windowIsFloating">true</item>
+        <!--&lt;!&ndash;是否浮现在activity之上&ndash;&gt;-->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--半透明-->
+        <item name="android:windowNoTitle">true</item>
+        <!--无标题-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--&lt;!&ndash;背景透明&ndash;&gt;-->
+        <item name="android:backgroundDimEnabled">false</item>
+        <!--模糊-->
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

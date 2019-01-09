@@ -48,6 +48,8 @@ dependencies {
     api rootProject.ext.dependencies["fragmentation"]
     //banner
     api rootProject.ext.dependencies["banner"]
+
+    api rootProject.ext.dependencies["spinKit"]
     //rxpermissions
     api rootProject.ext.dependencies["rxpermissions"]
     //    testApi 'junit:junit:4.12'

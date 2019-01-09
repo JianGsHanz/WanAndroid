@@ -34,5 +34,4 @@ public abstract class BaseMvpFragment<T extends AbsBasePresenter> extends BaseFr
         if (mPresenter != null)
             mPresenter.detachView();
     }
-
 }

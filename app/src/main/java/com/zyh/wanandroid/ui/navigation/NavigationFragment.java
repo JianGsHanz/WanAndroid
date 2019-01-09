@@ -102,7 +102,6 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
         rightFl.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-//                ((MainFragment)getParentFragment()).goFragment(WebFragment.newInstance(urlList.get(position),titleList.get(position),idList.get(position)),-1);
                 ((MainFragment)getParentFragment()).goFragment(WebFragment.newInstance(
                         articles.get(position).getLink(),articles.get(position).getTitle(),
                         articles.get(position).getId(),articles.get(position).isCollect(),-1),-1);

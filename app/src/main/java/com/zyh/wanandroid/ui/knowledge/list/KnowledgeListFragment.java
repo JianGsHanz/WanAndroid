@@ -68,7 +68,7 @@ public class KnowledgeListFragment extends BaseMvpFragment<KnowledgeListFPresent
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        knowledgeSwipe.setColorSchemeColors(Color.rgb(50, 233, 189));
+        knowledgeSwipe.setColorSchemeColors(Color.rgb(0, 0, 0));
         knowledgeRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         knowledgeListAdapter = new KnowledgeListAdapter(R.layout.item_knowledge_list_rv,dataList);
         knowledgeRv.setAdapter(knowledgeListAdapter);
@@ -92,7 +92,7 @@ public class KnowledgeListFragment extends BaseMvpFragment<KnowledgeListFPresent
         knowledgeSwipe.setRefreshing(false);
         if (isRefresh) { //刷新
             dataList = dataResult.getDatas();
-            knowledgeListAdapter.addData(dataList);
+            knowledgeListAdapter.setNewData(dataList);
         }else { //加载更多
             dataList.addAll(dataResult.getDatas());
             knowledgeListAdapter.replaceData(dataList);

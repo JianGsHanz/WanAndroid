@@ -16,7 +16,6 @@ import com.common.util.ToastUtils;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.UserResult;
-import com.zyh.wanandroid.ui.MsgEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.common.base.BaseFragment;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
-import com.zyh.wanandroid.ui.MsgEvent;
+import com.zyh.wanandroid.utils.event.MsgEvent;
 import com.zyh.wanandroid.ui.category.CategoryFragment;
 import com.zyh.wanandroid.ui.home.HomeFragment;
 import com.zyh.wanandroid.ui.knowledge.knowledgeFragment;

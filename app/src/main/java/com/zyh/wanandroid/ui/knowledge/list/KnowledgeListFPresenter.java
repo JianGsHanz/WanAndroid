@@ -4,10 +4,13 @@ import com.common.base.AbsBasePresenter;
 import com.common.util.RxUtils;
 import com.zyh.wanandroid.model.KnowledgeListResult;
 import com.zyh.wanandroid.net.AppApis;
+import com.zyh.wanandroid.utils.CustomConsumer;
+
+import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-import io.reactivex.functions.Consumer;
+import io.reactivex.disposables.Disposable;
 
 public class KnowledgeListFPresenter extends AbsBasePresenter<KnowledgeListConstract.view> implements KnowledgeListConstract.presenter{
     private AppApis appApis;
@@ -36,17 +39,22 @@ public class KnowledgeListFPresenter extends AbsBasePresenter<KnowledgeListConst
     }
 
     public void getKnowledgeList(){
-        registerRx(appApis.getKnowledgeList(page,id)
+        appApis.getKnowledgeList(page,id)
                 .compose(RxUtils.<KnowledgeListResult>rxSchedulerHelpe())
-                .subscribe(new Consumer<KnowledgeListResult>() {
+                .subscribe(new CustomConsumer<KnowledgeListResult>(((KnowledgeListFragment)mView).getActivity()) {
                     @Override
-                    public void accept(KnowledgeListResult dataResult) throws Exception {
-                        if (dataResult.getData().getDatas().size() != 0)
+                    public void onDisposable(@NotNull Disposable d) {
+                        registerRx(d);
+                    }
+
+                    @Override
+                    public void accept(KnowledgeListResult dataResult) {
+                        if (dataResult!=null &&dataResult.getData().getDatas().size() != 0)
                             mView.getKnowledgeListSuccess(dataResult.getData(),isRefresh);
                         else
                             mView.getKnowledgeListFail(dataResult.getErrorMsg());
                     }
-                }));
+                });
     }
 
 }

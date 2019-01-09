@@ -1,4 +1,4 @@
-package com.zyh.wanandroid.ui;
+package com.zyh.wanandroid.utils.event;
 
 /**
  * Time:2018/12/26

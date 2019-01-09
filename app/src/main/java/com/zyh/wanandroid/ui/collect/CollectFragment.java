@@ -19,7 +19,7 @@ import com.common.util.ToastUtils;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.CollectResult;
-import com.zyh.wanandroid.ui.CollectEvent;
+import com.zyh.wanandroid.utils.event.CollectEvent;
 import com.zyh.wanandroid.ui.collect.adapter.CollectAdapter;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;

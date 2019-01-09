@@ -24,7 +24,7 @@ import com.common.util.ToastUtils;
 import com.just.agentweb.AgentWeb;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
-import com.zyh.wanandroid.ui.CollectEvent;
+import com.zyh.wanandroid.utils.event.CollectEvent;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 
 import org.greenrobot.eventbus.EventBus;

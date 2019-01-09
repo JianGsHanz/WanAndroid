@@ -72,7 +72,7 @@ public class CategoryListFragment extends BaseMvpFragment<CategoryListFPresenter
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        categorySwipe.setColorSchemeColors(Color.rgb(233, 21, 52));
+        categorySwipe.setColorSchemeColors(Color.rgb(0, 0, 0));
         categorySwipe.setRefreshing(true);
 
         categoryRv.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -110,7 +110,7 @@ public class CategoryListFragment extends BaseMvpFragment<CategoryListFPresenter
         categorySwipe.setRefreshing(false);
         if (isRefresh) {
             dataList = dataResult.getDatas();
-            categoryListAdapter.addData(dataList);
+            categoryListAdapter.setNewData(dataList);
         } else {
             dataList.addAll(dataResult.getDatas());
             categoryListAdapter.replaceData(dataList);

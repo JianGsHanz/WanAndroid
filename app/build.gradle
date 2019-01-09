@@ -68,6 +68,7 @@ dependencies {
     implementation project(':common')
     implementation rootProject.ext.dependencies["BRVAH"]
     implementation rootProject.ext.dependencies["agentweb"]
+    implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
     //dagger2
     implementation rootProject.ext.dependencies["dagger"]
     annotationProcessor  rootProject.ext.dependencies["dagger-compiler"]
@@ -126,10 +127,11 @@ MobSDK {
             Wechat {
                 id 3
                 sortId 3
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
-                userName "gh_afb25ac019c9"
-                path "pages/index/index.html?id=1"
+                appId "wxf4ec0cdfbe116d9d"
+                appSecret "f57fb9f076cc0184e78b1a882a9e863f"
+                //小程序
+//                userName "gh_afb25ac019c9"
+//                path "pages/index/index.html?id=1"
                 withShareTicket true
                 miniprogramType 0
                 bypassApproval false

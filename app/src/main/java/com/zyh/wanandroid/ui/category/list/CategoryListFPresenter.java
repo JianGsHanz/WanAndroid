@@ -4,10 +4,13 @@ import com.common.base.AbsBasePresenter;
 import com.common.util.RxUtils;
 import com.zyh.wanandroid.model.CategoryListResult;
 import com.zyh.wanandroid.net.AppApis;
+import com.zyh.wanandroid.utils.CustomConsumer;
+
+import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-import io.reactivex.functions.Consumer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Time:2018/12/19
@@ -43,18 +46,22 @@ public class CategoryListFPresenter extends AbsBasePresenter<CategoryListConstra
     }
 
     private void getCategoryList(){
-        registerRx(appApis.getCategoryList(page,id)
-        .compose(RxUtils.<CategoryListResult>rxSchedulerHelpe())
-        .subscribe(new Consumer<CategoryListResult>() {
-            @Override
-            public void accept(CategoryListResult categoryListResult) throws Exception {
-                if (categoryListResult.getData().getDatas().size() != 0)
-                    mView.getCategoryListSuccess(categoryListResult.getData(),isRefresh);
-                else
-                    mView.getCategoryListFail(categoryListResult.getErrorMsg());
-            }
-        }));
+        appApis.getCategoryList(page,id)
+                .compose(RxUtils.<CategoryListResult>rxSchedulerHelpe())
+                .subscribe(new CustomConsumer<CategoryListResult>(((CategoryListFragment)mView).getActivity()) {
+                    @Override
+                    public void onDisposable(@NotNull Disposable d) {
+                        registerRx(d);
+                    }
 
+                    @Override
+                    public void accept(CategoryListResult categoryListResult) {
+                        if (categoryListResult.getData().getDatas().size() != 0)
+                            mView.getCategoryListSuccess(categoryListResult.getData(),isRefresh);
+                        else
+                            mView.getCategoryListFail(categoryListResult.getErrorMsg());
+                    }
+                });
     }
 
 

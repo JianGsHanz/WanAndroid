@@ -1,5 +1,6 @@
 package com.zyh.wanandroid.ui.home
 
+import android.content.Context
 import com.common.base.BasePresenter
 import com.common.base.BaseView
 import com.zyh.wanandroid.model.BannerResult
@@ -16,7 +17,7 @@ interface HomeFConstract{
         fun getHomeListSuccess(homeDatasResult : HomeResult,isRefresh : Boolean)
     }
     interface presenter : BasePresenter{
-        fun autoRefresh()
-        fun loadMore()
+        fun autoRefresh(context: Context)
+        fun loadMore(context: Context)
     }
 }

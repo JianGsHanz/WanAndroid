@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
-import com.common.util.LogUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -24,8 +23,8 @@ import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.BannerResult;
 import com.zyh.wanandroid.model.HomeResult;
-import com.zyh.wanandroid.ui.CollectEvent;
-import com.zyh.wanandroid.ui.MsgEvent;
+import com.zyh.wanandroid.utils.event.CollectEvent;
+import com.zyh.wanandroid.utils.event.MsgEvent;
 import com.zyh.wanandroid.ui.home.adapter.HomeRvAdapter;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;
@@ -98,7 +97,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
         homeSwipeLayout.setRefreshing(true);
         homeRecyclerView.setAdapter(homeRvAdapter);
 
-        mPresenter.autoRefresh();
+        mPresenter.autoRefresh(getActivity());
 
         homeSwipeLayout.setOnRefreshListener(this);
         homeRvAdapter.setOnLoadMoreListener(this);
@@ -151,10 +150,11 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
         homeSwipeLayout.setRefreshing(false);
         if (isRefresh) {
             homeResult = homeDatasResult.getDatas();
-            homeRvAdapter.replaceData(homeResult);
+            homeRvAdapter.setNewData(homeResult);
         } else {
             homeResult.addAll(homeDatasResult.getDatas());
-            homeRvAdapter.addData(homeResult);
+            homeRvAdapter.replaceData(homeResult);
+            homeRvAdapter.loadMoreComplete();
         }
     }
 
@@ -162,12 +162,12 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
     public void onRefresh() {
         EventBus.getDefault().post(new MsgEvent(0));
         homeSwipeLayout.setRefreshing(true);
-        mPresenter.autoRefresh();
+        mPresenter.autoRefresh(getActivity());
     }
 
     @Override
     public void onLoadMoreRequested() {
-        mPresenter.loadMore();
+        mPresenter.loadMore(getActivity());
     }
 
 
