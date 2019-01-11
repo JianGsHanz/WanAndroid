@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.base.BaseMvpFragment;
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -23,12 +24,12 @@ import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.BannerResult;
 import com.zyh.wanandroid.model.HomeResult;
-import com.zyh.wanandroid.utils.event.CollectEvent;
-import com.zyh.wanandroid.utils.event.MsgEvent;
 import com.zyh.wanandroid.ui.home.adapter.HomeRvAdapter;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;
 import com.zyh.wanandroid.utils.GlideImageLoader;
+import com.zyh.wanandroid.utils.event.CollectEvent;
+import com.zyh.wanandroid.utils.event.MsgEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -54,7 +55,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
 
 
     @BindView(R.id.home_recycler_view)
-    RecyclerView homeRecyclerView;
+    ShimmerRecyclerView homeRecyclerView;
     @BindView(R.id.home_swipe_layout)
     SwipeRefreshLayout homeSwipeLayout;
 
@@ -96,6 +97,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
         homeSwipeLayout.setColorSchemeColors(Color.rgb(50, 233, 189));
         homeSwipeLayout.setRefreshing(true);
         homeRecyclerView.setAdapter(homeRvAdapter);
+        homeRecyclerView.showShimmerAdapter();
 
         mPresenter.autoRefresh(getActivity());
 
@@ -147,6 +149,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
 
     @Override
     public void getHomeListSuccess(@NotNull HomeResult homeDatasResult, boolean isRefresh) {
+        homeRecyclerView.hideShimmerAdapter();
         homeSwipeLayout.setRefreshing(false);
         if (isRefresh) {
             homeResult = homeDatasResult.getDatas();

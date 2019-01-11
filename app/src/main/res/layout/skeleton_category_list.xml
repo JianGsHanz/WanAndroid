@@ -1,68 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/d_5"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_margin="@dimen/d_10"
+    android:orientation="horizontal"
+    >
 
 
-    <View
-        android:id="@+id/iv_pic_category"
+
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.3"
-        android:alpha="0.1"
-        android:background="@android:color/background_dark"/>
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        app:layout_constraintRight_toLeftOf="@id/iv_pic_category"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.65" >
+        android:layout_weight="6"
+        android:orientation="vertical">
 
         <View
-            android:id="@+id/tv_title_category"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:textColor="@color/colorBlack"
-            android:alpha="0.1"
-            android:layout_marginTop="@dimen/d_6"
-            android:background="@android:color/background_dark"/>
+            android:background="#24000000"/>
         <View
-            android:id="@+id/tv_desc_category"
             android:layout_width="wrap_content"
             android:layout_height="130dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_title_category"
             android:layout_marginTop="@dimen/d_10"
-            android:alpha="0.1"
-            android:background="@android:color/background_dark"/>
+            android:background="#24000000"/>
 
-        <View
-            android:id="@+id/tv_author_category"
-            android:layout_width="50dp"
-            android:layout_height="20dp"
-            android:alpha="0.1"
-            android:background="@android:color/background_dark"
-            app:layout_constraintBottom_toBottomOf="parent"
-             />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="@dimen/d_20"
+           android:orientation="horizontal">
+           <View
+               android:layout_width="50dp"
+               android:layout_height="20dp"
+               android:background="#24000000"
+               />
 
-        <View
-            android:id="@+id/tv_date_category"
-            android:layout_width="200dp"
-            android:layout_height="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv_author_category"
-            android:layout_marginLeft="@dimen/d_20"
-            android:alpha="0.1"
-            android:background="@android:color/background_dark"
-            />
-    </android.support.constraint.ConstraintLayout>
-
-</android.support.constraint.ConstraintLayout>
+           <View
+               android:layout_width="200dp"
+               android:layout_height="20dp"
+               android:layout_marginLeft="@dimen/d_20"
+               android:background="#24000000"
+               />
+       </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_marginLeft="@dimen/d_20"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_weight="3"
+        android:background="#24000000"/>
+</LinearLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/d_8"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="@dimen/d_20"
+            android:layout_height="@dimen/d_20"
+            android:background="@drawable/shape_head_gray"/>
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="@dimen/d_20"
+            android:layout_marginLeft="@dimen/d_5"
+            android:background="#24000000" />
+
+        <View
+            android:layout_width="80dp"
+            android:layout_marginLeft="230dp"
+            android:layout_height="@dimen/d_20"
+            android:background="#24000000"/>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="10dp"
+        android:background="#24000000"/>
+
+    <View
+        android:layout_marginTop="@dimen/d_10"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/d_30"
+        android:background="#24000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d_20"
+        android:layout_marginTop="@dimen/d_10"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <View
+
+            android:layout_width="@dimen/d_15"
+            android:layout_height="@dimen/d_15"
+            android:background="@drawable/shape_head_gray" />
+
+        <View
+            android:layout_width="@dimen/d_30"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="320dp"
+            android:background="#24000000" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,9 +1,6 @@
 package com.zyh.wanandroid.utils
 
-import android.app.Activity
 import android.content.Context
-import com.zyh.wanandroid.App
-import com.zyh.wanandroid.utils.view.BottomBar
 import com.zyh.wanandroid.utils.view.MDialog
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -20,8 +17,7 @@ abstract class CustomConsumer<T> :Observer<T>{
         this.context = context
     }
     override fun onComplete() {
-        if (mDialog != null)
-            mDialog!!.hide()
+
     }
 
     override fun onSubscribe(d: Disposable) {
@@ -32,11 +28,14 @@ abstract class CustomConsumer<T> :Observer<T>{
     }
 
     override fun onNext(t: T) {
+        if (mDialog!!.isShowing)
+            mDialog!!.hide()
         accept(t)
     }
 
     override fun onError(e: Throwable) {
-
+        if (mDialog!!.isShowing)
+            mDialog!!.hide()
     }
     abstract fun accept(t: T)
     abstract fun onDisposable(d: Disposable)
