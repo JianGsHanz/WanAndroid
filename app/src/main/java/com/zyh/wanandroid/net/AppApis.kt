@@ -92,4 +92,11 @@ interface AppApis{
      */
     @GET("lg/collect/list/{page}/json")
     fun getCollectList(@Path("page")page : Int) : Observable<CollectResult>
+    /**
+     * 搜索页面
+     */
+    @FormUrlEncoded
+    @POST("article/query/{page}/json")
+    fun getSearchList(@Path("page") page : Int,
+                      @Field("k")keyword : String) : Observable<CategoryListResult>
 }

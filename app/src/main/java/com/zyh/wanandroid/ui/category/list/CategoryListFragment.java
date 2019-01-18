@@ -10,18 +10,22 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.common.util.ToastUtils;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.zyh.wanandroid.App;
-import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.model.CategoryListResult;
 import com.zyh.wanandroid.ui.category.adapter.CategoryListAdapter;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;
+import com.zyh.wanandroid.utils.event.MsgEvent;
 
+import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -46,9 +50,14 @@ public class CategoryListFragment extends LBaseMvpFragment<CategoryListFPresente
     ShimmerRecyclerView categoryRv;
     @BindView(R.id.category_swipe)
     SwipeRefreshLayout categorySwipe;
+    @BindView(R.id.title_name)
+    TextView titleName;
+    @BindView(R.id.search)
+    ImageView search;
     private int id;
     private CategoryListAdapter categoryListAdapter;
     private List<CategoryListResult.DataBean.DatasBean> dataList = new ArrayList<>();
+    private String keyWord;
 
     @Inject
     public CategoryListFragment() {
@@ -66,7 +75,10 @@ public class CategoryListFragment extends LBaseMvpFragment<CategoryListFPresente
 
     @Override
     protected void initViewAndEvent() {
+        if (!TextUtils.isEmpty(keyWord)) {
 
+        } else {
+        }
     }
 
     @Override
@@ -81,34 +93,40 @@ public class CategoryListFragment extends LBaseMvpFragment<CategoryListFPresente
         categoryRv.setAdapter(categoryListAdapter);
         categoryRv.showShimmerAdapter();
 
-        mPresenter.autoRefresh(id);
+        mPresenter.autoRefresh(id, keyWord);
 
         categorySwipe.setOnRefreshListener(this);
         categoryListAdapter.setOnLoadMoreListener(this);
         categoryListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ((MainFragment) getParentFragment().getParentFragment())
-                        .goFragment(WebFragment.newInstance(dataList.get(position).getLink(),
-                                dataList.get(position).getTitle(), dataList.get(position).getId(),
-                                dataList.get(position).isCollect(),-1),-1);
+                if (TextUtils.isEmpty(keyWord))
+                    ((MainFragment) getParentFragment().getParentFragment())
+                            .goFragment(WebFragment.newInstance(dataList.get(position).getLink(),
+                                    dataList.get(position).getTitle(), dataList.get(position).getId(),
+                                    dataList.get(position).isCollect(), -1), -1);
+                else
+                    ((MainFragment) getParentFragment())
+                            .goFragment(WebFragment.newInstance(dataList.get(position).getLink(),
+                                    dataList.get(position).getTitle(), dataList.get(position).getId(),
+                                    dataList.get(position).isCollect(), -1), -1);
 
             }
         });
 
     }
 
-    public static CategoryListFragment newInstance(int id) {
+    public static CategoryListFragment newInstance(int id, String k) {
         CategoryListFragment categoryListFragment = new CategoryListFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("id", id);
+        bundle.putString("keyword", k);
         categoryListFragment.setArguments(bundle);
         return categoryListFragment;
     }
 
     @Override
     public void getCategoryListSuccess(@NotNull CategoryListResult.DataBean dataResult, boolean isRefresh) {
-        showNormal();
         categoryRv.hideShimmerAdapter();
         categorySwipe.setRefreshing(false);
         if (isRefresh) {
@@ -124,18 +142,19 @@ public class CategoryListFragment extends LBaseMvpFragment<CategoryListFPresente
 
     @Override
     public void getCategoryListFail(@NotNull String errorMsg) {
-        showError(errorMsg);
         if (TextUtils.isEmpty(errorMsg))
             categoryListAdapter.loadMoreEnd();
         else
             ToastUtils.showShortToast(errorMsg);
+
+        _mActivity.onBackPressed();
 
     }
 
     //下拉刷新
     @Override
     public void onRefresh() {
-        mPresenter.autoRefresh(id);
+        mPresenter.autoRefresh(id, keyWord);
     }
 
     //上拉加载
@@ -149,6 +168,7 @@ public class CategoryListFragment extends LBaseMvpFragment<CategoryListFPresente
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         id = getArguments().getInt("id");
+        keyWord = getArguments().getString("keyword");
         return rootView;
     }
 

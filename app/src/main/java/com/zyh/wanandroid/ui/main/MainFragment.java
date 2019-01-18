@@ -2,22 +2,26 @@ package com.zyh.wanandroid.ui.main;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.common.base.BaseFragment;
+import com.common.util.ToastUtils;
+import com.wyt.searchbox.SearchFragment;
+import com.wyt.searchbox.custom.IOnSearchClickListener;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
-import com.zyh.wanandroid.utils.event.MsgEvent;
 import com.zyh.wanandroid.ui.category.CategoryFragment;
+import com.zyh.wanandroid.ui.category.list.CategoryListFragment;
 import com.zyh.wanandroid.ui.home.HomeFragment;
 import com.zyh.wanandroid.ui.knowledge.knowledgeFragment;
 import com.zyh.wanandroid.ui.mine.MineFragment;
 import com.zyh.wanandroid.ui.navigation.NavigationFragment;
+import com.zyh.wanandroid.utils.event.MsgEvent;
 import com.zyh.wanandroid.utils.view.BottomBar;
 import com.zyh.wanandroid.utils.view.BottomBarTab;
 
@@ -39,7 +43,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * Date : 2018/12/4
  * Description :
  */
-public class MainFragment extends BaseFragment implements ISupportFragment {
+public class MainFragment extends BaseFragment implements ISupportFragment, IOnSearchClickListener {
     @Inject
     HomeFragment homeFragment;
     @Inject
@@ -57,8 +61,11 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
     TextView titleName;
     @BindView(R.id.bottomBar)
     BottomBar bottomBar;
+    @BindView(R.id.search)
+    ImageView search;
 
     private SupportFragment[] fragments = new SupportFragment[5];
+    private SearchFragment searchFragment;
 
     @Inject
     public MainFragment() {
@@ -83,6 +90,8 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
                 knowledgeFragment,
                 categoryFragment,
                 mineFragment);
+        searchFragment = SearchFragment.newInstance();
+        searchFragment.setOnSearchClickListener(this);
     }
 
     @Override
@@ -142,27 +151,43 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
         });
 
     }
+
     @SuppressLint("RestrictedApi")
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(MsgEvent msgEvent){
-        if ((int)msgEvent.getO() == 1) {
+    public void onEvent(MsgEvent msgEvent) {
+        if ((int) msgEvent.getO() == 1) {
             fab.setVisibility(View.VISIBLE);
             fab.animate().scaleX(1F).scaleY(1F).setDuration(500).start();
+        }else if((int) msgEvent.getO() == 2){
+            titleName.setText("搜索结果");
         } else {
             fab.animate().scaleX(0F).scaleY(0F).setDuration(500).start();
         }
     }
 
-    @OnClick(R.id.fab)
-    public void onViewClicked() {
-        EventBus.getDefault().post("event");
+    @OnClick({R.id.search, R.id.fab})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.search:
+                ToastUtils.showShortToast(titleName.getText().toString());
+                searchFragment.showFragment(getChildFragmentManager(), SearchFragment.TAG);
+                break;
+            case R.id.fab:
+                EventBus.getDefault().post("event");
+                break;
+        }
     }
 
-    public void goFragment(ISupportFragment fragment,int requestCode) {
+    @Override
+    public void OnSearchClick(String keyword) {
+        goFragment(CategoryListFragment.newInstance(-1,keyword),-1);
+    }
+
+    public void goFragment(ISupportFragment fragment, int requestCode) {
         if (requestCode == -1)
-        start(fragment);
+            start(fragment);
         else
-        startForResult(fragment,requestCode);
+            startForResult(fragment, requestCode);
     }
 
     @Override
@@ -170,6 +195,7 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
         super.onFragmentResult(requestCode, resultCode, data);
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);

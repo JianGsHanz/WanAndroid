@@ -5,7 +5,10 @@
     android:id="@+id/normal_view"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <include layout="@layout/layout_title"
+        android:id="@+id/title_layout"/>
     <android.support.v4.widget.SwipeRefreshLayout
+        app:layout_constraintTop_toBottomOf="@id/title_layout"
         android:id="@+id/category_swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

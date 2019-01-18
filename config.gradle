@@ -32,6 +32,7 @@ ext{
             "BRVAH" :"com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30",
             "banner" :"com.youth.banner:banner:1.4.10",
             "spinKit" :"com.github.ybq:Android-SpinKit:1.2.0",
+            "searchbox" :"com.wenwenwen888:searchbox:1.0.1",
             "flowlayout" :"com.hyman:flowlayout-lib:1.1.2",
             "agentweb" :"com.just.agentweb:agentweb:4.0.2",
             "rxpermissions" :"com.github.tbruyelle:rxpermissions:0.10.2",

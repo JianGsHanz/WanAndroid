@@ -25,7 +25,7 @@ public class FPagerAdapter extends FragmentPagerAdapter{
         this.titleList = titleList;
         this.idList = idList;
         for (int i = 0; i < idList.size() ; i++) {
-            fragments.add(CategoryListFragment.newInstance(idList.get(i)));
+            fragments.add(CategoryListFragment.newInstance(idList.get(i),""));
         }
     }
 

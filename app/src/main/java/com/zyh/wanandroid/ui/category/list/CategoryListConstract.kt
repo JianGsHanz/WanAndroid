@@ -15,7 +15,7 @@ interface CategoryListConstract{
         fun getCategoryListFail(errorMsg : String)
     }
     interface presenter : BasePresenter{
-        fun autoRefresh(id : Int)
+        fun autoRefresh(id : Int,keyword : String)
         fun loadMore()
     }
 }

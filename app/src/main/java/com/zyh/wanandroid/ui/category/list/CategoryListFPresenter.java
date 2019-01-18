@@ -1,5 +1,7 @@
 package com.zyh.wanandroid.ui.category.list;
 
+import android.text.TextUtils;
+
 import com.common.base.AbsBasePresenter;
 import com.common.util.RxUtils;
 import com.zyh.wanandroid.model.CategoryListResult;
@@ -21,6 +23,7 @@ public class CategoryListFPresenter extends AbsBasePresenter<CategoryListConstra
     private int page = 1;
     private boolean isRefresh = false;
     private int id;
+    private String keyWord;
 
     @Inject
     public CategoryListFPresenter(AppApis appApis) {
@@ -28,18 +31,25 @@ public class CategoryListFPresenter extends AbsBasePresenter<CategoryListConstra
     }
 
     @Override
-    public void autoRefresh(int id) {
+    public void autoRefresh(int id,String keyWord) {
         this.id = id;
+        this.keyWord = keyWord;
         page = 1;
         isRefresh = true;
-        getCategoryList();
+        if (TextUtils.isEmpty(keyWord))
+            getCategoryList();
+        else
+            getSearchList();
     }
 
     @Override
     public void loadMore() {
         page++;
         isRefresh = false;
-        getCategoryList();
+        if (TextUtils.isEmpty(keyWord))
+            getCategoryList();
+        else
+            getSearchList();
     }
 
     private void getCategoryList(){
@@ -56,10 +66,28 @@ public class CategoryListFPresenter extends AbsBasePresenter<CategoryListConstra
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        mView.getCategoryListFail(throwable.getMessage());
                     }
                 }));
     }
 
+    private void getSearchList() {
+        registerRx(appApis.getSearchList(page,keyWord)
+                .compose(RxUtils.<CategoryListResult>rxSchedulerHelpe())
+                .subscribe(new Consumer<CategoryListResult>() {
+                    @Override
+                    public void accept(CategoryListResult categoryListResult) throws Exception {
+                        if (categoryListResult.getData().getDatas().size() != 0)
+                            mView.getCategoryListSuccess(categoryListResult.getData(),isRefresh);
+                        else
+                            mView.getCategoryListFail("暂无数据");
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.getCategoryListFail(throwable.getMessage());
+                    }
+                }));
+    }
 
 }
