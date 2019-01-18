@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.common.base.BaseMvpFragment;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.ArticleResult;
 import com.zyh.wanandroid.ui.knowledge.adapter.FmPagerAdapter;
@@ -29,7 +29,7 @@ import butterknife.Unbinder;
  * Date : 2018/12/18
  * Description :知识文章
  */
-public class KnowledgeArticleFragment extends BaseMvpFragment<KnowledgeArticleFPresenter> implements KnowledgeArticleFConstract.view {
+public class KnowledgeArticleFragment extends LBaseMvpFragment<KnowledgeArticleFPresenter> implements KnowledgeArticleFConstract.view {
 
     @BindView(R.id.title_name)
     TextView titleName;

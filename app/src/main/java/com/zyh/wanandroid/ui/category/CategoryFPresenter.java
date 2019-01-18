@@ -32,6 +32,11 @@ public class CategoryFPresenter extends AbsBasePresenter<CategoryFConstract.view
                 if (categoryResult.getErrorCode() == 0)
                     mView.getCategorySuccess(categoryResult.getData());
             }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
+            }
         }));
 
     }

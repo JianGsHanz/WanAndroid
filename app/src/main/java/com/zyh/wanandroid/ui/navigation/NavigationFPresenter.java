@@ -2,16 +2,11 @@ package com.zyh.wanandroid.ui.navigation;
 
 import com.common.base.AbsBasePresenter;
 import com.common.util.RxUtils;
-import com.zyh.wanandroid.model.BaseResult;
 import com.zyh.wanandroid.model.NavigationResult;
 import com.zyh.wanandroid.net.AppApis;
-import com.zyh.wanandroid.utils.CustomConsumer;
-
-import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -29,20 +24,20 @@ public class NavigationFPresenter extends AbsBasePresenter<NavigationConstract.v
 
     @Override
     public void loadData() {
-        appApis.getNavigation()
+        registerRx(appApis.getNavigation()
                 .compose(RxUtils.<NavigationResult>rxSchedulerHelpe())
-                .subscribe(new CustomConsumer<NavigationResult>(((NavigationFragment)mView).getActivity()) {
+                .subscribe(new Consumer<NavigationResult>() {
                     @Override
-                    public void onDisposable(@NotNull Disposable d) {
-                        registerRx(d);
-                    }
-
-                    @Override
-                    public void accept(NavigationResult navigationResult) {
+                    public void accept(NavigationResult navigationResult) throws Exception {
                         if (navigationResult.getErrorCode() == 0)
                             mView.getNavigationSuccess(navigationResult);
                     }
-                });
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                }));
     }
 
 }

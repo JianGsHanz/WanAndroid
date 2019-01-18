@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
-import com.common.base.BaseActivity;
 import com.common.base.IBaseMvpActivity;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
-import com.zyh.wanandroid.ui.LBaseActivity;
+import com.zyh.wanandroid.base.LBaseActivity;
 
 import javax.inject.Inject;
 
@@ -30,7 +29,7 @@ public class MainActivity extends LBaseActivity implements IBaseMvpActivity<Main
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadRootFragment(R.id.fl_container,mainFragment);
+        loadRootFragment(R.id.normal_view,mainFragment);
 
     }
 

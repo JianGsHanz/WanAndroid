@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.common.base.BaseMvpFragment;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.CategoryResult;
 import com.zyh.wanandroid.ui.category.adapter.FPagerAdapter;
@@ -29,7 +29,7 @@ import butterknife.Unbinder;
  * Date : 2018/11/30
  * Description :项目分类
  */
-public class CategoryFragment extends BaseMvpFragment<CategoryFPresenter> implements CategoryFConstract.view {
+public class CategoryFragment extends LBaseMvpFragment<CategoryFPresenter> implements CategoryFConstract.view {
 
     Unbinder unbinder;
     @BindView(R.id.tab_layout)

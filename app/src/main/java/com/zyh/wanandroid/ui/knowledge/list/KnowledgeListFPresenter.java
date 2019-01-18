@@ -4,13 +4,10 @@ import com.common.base.AbsBasePresenter;
 import com.common.util.RxUtils;
 import com.zyh.wanandroid.model.KnowledgeListResult;
 import com.zyh.wanandroid.net.AppApis;
-import com.zyh.wanandroid.utils.CustomConsumer;
-
-import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 public class KnowledgeListFPresenter extends AbsBasePresenter<KnowledgeListConstract.view> implements KnowledgeListConstract.presenter{
     private AppApis appApis;
@@ -39,22 +36,22 @@ public class KnowledgeListFPresenter extends AbsBasePresenter<KnowledgeListConst
     }
 
     public void getKnowledgeList(){
-        appApis.getKnowledgeList(page,id)
+        registerRx(appApis.getKnowledgeList(page,id)
                 .compose(RxUtils.<KnowledgeListResult>rxSchedulerHelpe())
-                .subscribe(new CustomConsumer<KnowledgeListResult>(((KnowledgeListFragment)mView).getActivity()) {
+                .subscribe(new Consumer<KnowledgeListResult>() {
                     @Override
-                    public void onDisposable(@NotNull Disposable d) {
-                        registerRx(d);
-                    }
-
-                    @Override
-                    public void accept(KnowledgeListResult dataResult) {
+                    public void accept(KnowledgeListResult dataResult) throws Exception {
                         if (dataResult!=null &&dataResult.getData().getDatas().size() != 0)
                             mView.getKnowledgeListSuccess(dataResult.getData(),isRefresh);
                         else
                             mView.getKnowledgeListFail(dataResult.getErrorMsg());
                     }
-                });
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.getKnowledgeListFail(throwable.getMessage());
+                    }
+                }));
     }
 
 }

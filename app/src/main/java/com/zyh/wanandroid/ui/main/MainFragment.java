@@ -70,8 +70,7 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         fragments[0] = homeFragment;
         fragments[1] = navigationFragment;
         fragments[2] = knowledgeFragment;
@@ -115,7 +114,7 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
                         fab.setVisibility(View.GONE);
                         break;
                     case 2:
-                        titleName.setText("文章");
+                        titleName.setText("知识");
                         fab.setVisibility(View.GONE);
                         break;
                     case 3:
@@ -127,7 +126,8 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
                         fab.setVisibility(View.GONE);
                         break;
                 }
-                showHideFragment(fragments[position], fragments[prePosition]);
+//                showHideFragment(fragments[position], fragments[prePosition]);
+                showHideFragment(fragments[position]);
             }
 
             @Override
@@ -148,7 +148,7 @@ public class MainFragment extends BaseFragment implements ISupportFragment {
         if ((int)msgEvent.getO() == 1) {
             fab.setVisibility(View.VISIBLE);
             fab.animate().scaleX(1F).scaleY(1F).setDuration(500).start();
-        }else {
+        } else {
             fab.animate().scaleX(0F).scaleY(0F).setDuration(500).start();
         }
     }

@@ -38,6 +38,7 @@ public class LeftAdapter extends BaseQuickAdapter<NavigationResult.DataBean,Left
         }else{
             helper.setTextColor(R.id.left_tv,R.color.colorBlack);
             helper.setTextColor(R.id.left_tv,Color.BLACK);
+            helper.getView(R.id.left_tv).setSelected(false);
         }
 
     }

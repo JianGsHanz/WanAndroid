@@ -9,16 +9,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.common.base.BaseMvpFragment;
 import com.common.util.PrefsUtils;
 import com.common.util.ToastUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.ui.collect.CollectFragment;
 import com.zyh.wanandroid.ui.knowledge.article.KnowledgeArticleFragment;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.main.MainFragment;
+import com.zyh.wanandroid.utils.event.MsgEvent;
 import com.zyh.wanandroid.utils.view.CustomSettingLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -37,7 +38,7 @@ import butterknife.Unbinder;
  * Date : 2018/11/30
  * Description :我的
  */
-public class MineFragment extends BaseMvpFragment<MineFPresenter> implements MineFConstract.view {
+public class MineFragment extends LBaseMvpFragment<MineFPresenter> implements MineFConstract.view {
 
     Unbinder unbinder;
     @BindView(R.id.iv_head_round)

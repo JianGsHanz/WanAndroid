@@ -83,6 +83,7 @@ public abstract class BaseFragment extends SupportFragment implements LifecycleP
         super.onViewCreated(view, savedInstanceState);
         lifecycleSubject.onNext(FragmentEvent.CREATE_VIEW);
         mUnbinder = ButterKnife.bind(this, view);
+        initView();
         initInject();
         initViewAndEvent();
     }
@@ -135,6 +136,8 @@ public abstract class BaseFragment extends SupportFragment implements LifecycleP
      */
     protected abstract int getLayoutId();
 
+
+    protected abstract void initView();
     /**
      * 初始化dagger注入
      */

@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.common.base.BaseMvpFragment;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.ArticleResult;
 import com.zyh.wanandroid.ui.knowledge.adapter.ArticleRvAdapter;
@@ -32,7 +32,7 @@ import butterknife.Unbinder;
  * Date : 2018/11/30
  * Description :知识
  */
-public class knowledgeFragment extends BaseMvpFragment<knowledgeFPresenter> implements knowledgeFConstract.view, BaseQuickAdapter.OnItemClickListener {
+public class knowledgeFragment extends LBaseMvpFragment<knowledgeFPresenter> implements knowledgeFConstract.view, BaseQuickAdapter.OnItemClickListener {
 
     Unbinder unbinder;
     @BindView(R.id.article_rv)

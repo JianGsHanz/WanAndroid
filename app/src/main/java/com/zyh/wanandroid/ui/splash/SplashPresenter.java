@@ -31,6 +31,11 @@ public class SplashPresenter extends AbsBasePresenter<SplashContract.view> imple
                         if (aLong == 0)
                             mView.result();
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
                 }));
     }
 

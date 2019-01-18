@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.common.base.BaseMvpFragment;
 import com.common.util.ToastUtils;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.KnowledgeListResult;
 import com.zyh.wanandroid.ui.knowledge.adapter.KnowledgeListAdapter;
@@ -37,7 +37,7 @@ import butterknife.Unbinder;
  * Date : 2018/11/30
  * Description :知识文章列表
  */
-public class KnowledgeListFragment extends BaseMvpFragment<KnowledgeListFPresenter> implements KnowledgeListConstract.view, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
+public class KnowledgeListFragment extends LBaseMvpFragment<KnowledgeListFPresenter> implements KnowledgeListConstract.view, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R.id.knowledge_rv)
     RecyclerView knowledgeRv;
     @BindView(R.id.knowledge_swipe)
@@ -71,6 +71,7 @@ public class KnowledgeListFragment extends BaseMvpFragment<KnowledgeListFPresent
         knowledgeSwipe.setColorSchemeColors(Color.rgb(0, 0, 0));
         knowledgeRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         knowledgeListAdapter = new KnowledgeListAdapter(R.layout.item_knowledge_list_rv,dataList);
+        knowledgeListAdapter.openLoadAnimation();
         knowledgeRv.setAdapter(knowledgeListAdapter);
 
         knowledgeSwipe.setOnRefreshListener(this);

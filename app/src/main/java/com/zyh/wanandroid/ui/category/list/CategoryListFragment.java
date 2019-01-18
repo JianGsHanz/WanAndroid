@@ -12,10 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.common.base.BaseMvpFragment;
 import com.common.util.ToastUtils;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.CategoryListResult;
 import com.zyh.wanandroid.ui.category.adapter.CategoryListAdapter;
@@ -38,7 +38,7 @@ import butterknife.Unbinder;
  * Author:ZYH
  * Description:项目分类列表
  */
-public class CategoryListFragment extends BaseMvpFragment<CategoryListFPresenter> implements CategoryListConstract.view,
+public class CategoryListFragment extends LBaseMvpFragment<CategoryListFPresenter> implements CategoryListConstract.view,
         BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     Unbinder unbinder;
@@ -76,6 +76,7 @@ public class CategoryListFragment extends BaseMvpFragment<CategoryListFPresenter
 
         categoryRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoryListAdapter = new CategoryListAdapter(R.layout.item_category_list_rv, dataList);
+        categoryListAdapter.openLoadAnimation();
         categoryRv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         categoryRv.setAdapter(categoryListAdapter);
         categoryRv.showShimmerAdapter();
@@ -107,6 +108,7 @@ public class CategoryListFragment extends BaseMvpFragment<CategoryListFPresenter
 
     @Override
     public void getCategoryListSuccess(@NotNull CategoryListResult.DataBean dataResult, boolean isRefresh) {
+        showNormal();
         categoryRv.hideShimmerAdapter();
         categorySwipe.setRefreshing(false);
         if (isRefresh) {
@@ -122,6 +124,7 @@ public class CategoryListFragment extends BaseMvpFragment<CategoryListFPresenter
 
     @Override
     public void getCategoryListFail(@NotNull String errorMsg) {
+        showError(errorMsg);
         if (TextUtils.isEmpty(errorMsg))
             categoryListAdapter.loadMoreEnd();
         else

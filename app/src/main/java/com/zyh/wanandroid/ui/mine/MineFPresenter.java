@@ -35,6 +35,11 @@ public class MineFPresenter extends AbsBasePresenter<MineFConstract.view> implem
                 else
                     mView.logoutFail(baseResult.getErrorMsg());
             }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                mView.logoutFail(throwable.getMessage());
+            }
         }));
     }
 }

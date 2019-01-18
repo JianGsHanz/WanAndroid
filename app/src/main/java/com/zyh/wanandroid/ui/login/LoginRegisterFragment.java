@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.common.base.BaseMvpFragment;
 import com.common.util.PrefsUtils;
 import com.common.util.ToastUtils;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.UserResult;
 
@@ -31,7 +31,7 @@ import butterknife.Unbinder;
  * Date : 2018/12/3
  * Description :登录注册
  */
-public class LoginRegisterFragment extends BaseMvpFragment<LoginRegisterFPresenter> implements LoginRegisterFConstract.view {
+public class LoginRegisterFragment extends LBaseMvpFragment<LoginRegisterFPresenter> implements LoginRegisterFConstract.view {
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;

@@ -57,17 +57,18 @@ public class OkHttpHelper {
                 // 失败重发
                 .retryOnConnectionFailure(true)
                 //设置缓存
-                .addNetworkInterceptor(mRewriteCacheControlInterceptor)
+//                .addNetworkInterceptor(mRewriteCacheControlInterceptor)
                 .addInterceptor(mRewriteCacheControlInterceptor)
                 //FaceBook 网络调试器，可在Chrome调试网络请求，查看SharePreferences,数据库等
 //                .addNetworkInterceptor(new StethoInterceptor())
                 //http数据log，日志中打印出HTTP请求&响应数据
                 .addInterceptor(loggingInterceptor)
-                .addInterceptor(new AddCookiesInterceptor())
-                .addInterceptor(new SaveCookiesInterceptor())
+//                .addInterceptor(new AddCookiesInterceptor())
+//                .addInterceptor(new SaveCookiesInterceptor())
                 //便于查看json
                 // .addInterceptor(new LoggerInterceptor())
 //                .addInterceptor(new UserAgentInterceptor())
+                .cookieJar(new CookiesManager())
                 .build();
     }
 
@@ -129,8 +130,10 @@ public class OkHttpHelper {
             if (NetworkUtils.isConnected(mContext)) {
                 //有网的时候读接口上的@Headers里的配置，你可以在这里进行统一的设置
                 String cacheControl = request.cacheControl().toString();
-                return originalResponse.newBuilder().header("Cache-Control", cacheControl)
-                        .removeHeader("Pragma").build();
+                return originalResponse.newBuilder()
+                        .header("Cache-Control", cacheControl)
+                        .removeHeader("Pragma")
+                        .build();
             } else {
                 return originalResponse.newBuilder()
                         .header("Cache-Control", "public, only-if-cached, max-stale=" + CACHE_STALE_LONG)

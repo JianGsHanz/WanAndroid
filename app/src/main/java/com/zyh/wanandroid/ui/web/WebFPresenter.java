@@ -28,6 +28,11 @@ public class WebFPresenter extends AbsBasePresenter<WebFContract.view> implement
                 if (result.getErrorCode() == 0)
                     mView.onCollectSuccess();
             }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
+            }
         }));
     }
 
@@ -43,6 +48,11 @@ public class WebFPresenter extends AbsBasePresenter<WebFContract.view> implement
                 if (result.getErrorCode() == -1001)
                     mView.unOverdue();
             }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
+            }
         }));
     }
 
@@ -55,6 +65,11 @@ public class WebFPresenter extends AbsBasePresenter<WebFContract.view> implement
                     public void accept(BaseResult<String> result) throws Exception {
                         if (result.getErrorCode() == 0)
                             mView.unCollectSuccess();
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
                     }
                 }));
     }

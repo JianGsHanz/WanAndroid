@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.common.base.BaseMvpFragment;
 import com.common.util.PrefsUtils;
 import com.common.util.ToastUtils;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.CollectResult;
 import com.zyh.wanandroid.utils.event.CollectEvent;
@@ -43,7 +43,7 @@ import butterknife.Unbinder;
  * Date : 2018/12/27
  * Description :
  */
-public class CollectFragment extends BaseMvpFragment<CollectFPresenter> implements CollectFConstract.view, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
+public class CollectFragment extends LBaseMvpFragment<CollectFPresenter> implements CollectFConstract.view, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     @BindView(R.id.collect_recycler_view)
     RecyclerView recyclerView;
@@ -72,12 +72,13 @@ public class CollectFragment extends BaseMvpFragment<CollectFPresenter> implemen
     @Override
     protected void initViewAndEvent() {
         titleName.setText("收藏");
-        swipeLayout.setColorSchemeColors(Color.rgb(32, 123, 255));
+        swipeLayout.setColorSchemeColors(Color.rgb(0, 0, 0));
         swipeLayout.setRefreshing(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         adapter = new CollectAdapter(list);
+        adapter.openLoadAnimation();
         recyclerView.setAdapter(adapter);
 
         mPresenter.onRefresh();

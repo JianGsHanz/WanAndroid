@@ -33,6 +33,11 @@ public class knowledgeFPresenter extends AbsBasePresenter<knowledgeFConstract.vi
                     mView.getAricleSuccess(articleResult.getData());
                 }
             }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
+            }
         }));
     }
 

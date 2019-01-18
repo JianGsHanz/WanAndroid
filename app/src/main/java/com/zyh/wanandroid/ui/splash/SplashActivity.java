@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 import com.common.base.IBaseMvpActivity;
-import com.common.util.LogUtils;
 import com.common.util.ToastUtils;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.R;
-import com.zyh.wanandroid.ui.LBaseActivity;
+import com.zyh.wanandroid.base.LBaseActivity;
 import com.zyh.wanandroid.ui.main.MainActivity;
 
 import org.jetbrains.annotations.Nullable;

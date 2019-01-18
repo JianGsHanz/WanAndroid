@@ -1,22 +1,16 @@
 package com.zyh.wanandroid.ui.home;
 
-import android.content.Context;
-
 import com.common.base.AbsBasePresenter;
 import com.common.util.RxUtils;
 import com.zyh.wanandroid.model.BannerResult;
 import com.zyh.wanandroid.model.BaseResult;
 import com.zyh.wanandroid.model.HomeResult;
 import com.zyh.wanandroid.net.AppApis;
-import com.zyh.wanandroid.utils.CustomConsumer;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -43,38 +37,42 @@ public class HomeFPresenter extends AbsBasePresenter<HomeFConstract.view> implem
                     public void accept(BaseResult<List<BannerResult>> listBaseResult) throws Exception {
                         mView.getBannerSuccess(listBaseResult.getData());
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                    }
                 }));
 
     }
 
     @Override
-    public void autoRefresh(Context context) {
+    public void autoRefresh() {
         isRefresh = true;
         currentPage = 0;
-        getHomeListData(currentPage,context);
+        getHomeListData(currentPage);
     }
 
     @Override
-    public void loadMore(Context context) {
+    public void loadMore() {
         isRefresh = false;
         currentPage++;
-        getHomeListData(currentPage,context);
+        getHomeListData(currentPage);
     }
 
-    private void getHomeListData(int currentPage,Context context) {
-        appApis.getHomeArticleList(currentPage)
+    private void getHomeListData(int currentPage) {
+        registerRx(appApis.getHomeArticleList(currentPage)
                 .compose(RxUtils.<BaseResult<HomeResult>>rxSchedulerHelpe())
-                .subscribe(new CustomConsumer<BaseResult<HomeResult>>(context) {
+                .subscribe(new Consumer<BaseResult<HomeResult>>() {
                     @Override
-                    public void onDisposable(@NotNull Disposable d) {
-                        registerRx(d);
-                    }
-
-                    @Override
-                    public void accept(BaseResult<HomeResult> homeResultBaseResult) {
+                    public void accept(BaseResult<HomeResult> homeResultBaseResult) throws Exception {
                         mView.getHomeListSuccess(homeResultBaseResult.getData(),isRefresh);
                     }
-                });
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.getHomeListFail(throwable.getMessage());
+                    }
+                }));
     }
 
 

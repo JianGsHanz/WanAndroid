@@ -55,6 +55,11 @@ public class CollectFPresenter extends AbsBasePresenter<CollectFConstract.view> 
 
 
             }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
+            }
         }));
     }
 }

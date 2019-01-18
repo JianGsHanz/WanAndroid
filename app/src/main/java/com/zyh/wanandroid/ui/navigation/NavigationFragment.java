@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.common.base.BaseMvpFragment;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.NavigationResult;
 import com.zyh.wanandroid.ui.main.MainFragment;
@@ -36,7 +36,7 @@ import butterknife.Unbinder;
  * Date : 2018/12/17
  * Description :导航
  */
-public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> implements NavigationConstract.view {
+public class NavigationFragment extends LBaseMvpFragment<NavigationFPresenter> implements NavigationConstract.view {
 
     @BindView(R.id.left_rv)
     RecyclerView leftRv;
@@ -69,6 +69,7 @@ public class NavigationFragment extends BaseMvpFragment<NavigationFPresenter> im
     protected void initViewAndEvent() {
         leftRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         leftAdapter = new LeftAdapter(R.layout.item_left_recycler_view, dataList);
+        leftAdapter.openLoadAnimation();
         leftRv.setAdapter(leftAdapter);
 
         leftAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

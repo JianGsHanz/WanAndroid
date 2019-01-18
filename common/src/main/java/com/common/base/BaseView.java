@@ -5,5 +5,9 @@ package com.common.base;
  */
 
 public interface BaseView {
-
+    void showNormal();
+    void showLoading();
+    void showEmpty();
+    void showError(String error);
+    void reLoad();
 }

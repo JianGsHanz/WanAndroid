@@ -18,11 +18,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.common.base.BaseMvpFragment;
 import com.common.util.PrefsUtils;
 import com.common.util.ToastUtils;
 import com.just.agentweb.AgentWeb;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.utils.event.CollectEvent;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
@@ -41,7 +41,7 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  * Date : 2018/12/3
  * Description :所有web详情
  */
-public class WebFragment extends BaseMvpFragment<WebFPresenter> implements WebFContract.view {
+public class WebFragment extends LBaseMvpFragment<WebFPresenter> implements WebFContract.view {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;

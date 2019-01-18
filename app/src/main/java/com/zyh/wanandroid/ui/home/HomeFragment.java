@@ -14,13 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.common.base.BaseMvpFragment;
-import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.zyh.wanandroid.App;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.BannerResult;
 import com.zyh.wanandroid.model.HomeResult;
@@ -50,12 +49,12 @@ import butterknife.Unbinder;
  * Date : 2018/11/30
  * Description :首页
  */
-public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements HomeFConstract.view, SwipeRefreshLayout.OnRefreshListener,
+public class HomeFragment extends LBaseMvpFragment<HomeFPresenter> implements HomeFConstract.view, SwipeRefreshLayout.OnRefreshListener,
         BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener{
 
 
     @BindView(R.id.home_recycler_view)
-    ShimmerRecyclerView homeRecyclerView;
+    RecyclerView homeRecyclerView;
     @BindView(R.id.home_swipe_layout)
     SwipeRefreshLayout homeSwipeLayout;
 
@@ -84,7 +83,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initViewAndEvent() {
-
+        showLoading();
         ConstraintLayout bannerView = (ConstraintLayout) LayoutInflater.from(getActivity()).inflate(R.layout.layout_home_banner, null);
         banner = bannerView.findViewById(R.id.home_banner);
         bannerView.removeView(banner);
@@ -92,14 +91,14 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
 
         homeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         homeRvAdapter = new HomeRvAdapter(R.layout.item_home_recycler_view, homeResult);
+        homeRvAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         homeRvAdapter.addHeaderView(bannerView);
 
-        homeSwipeLayout.setColorSchemeColors(Color.rgb(50, 233, 189));
-        homeSwipeLayout.setRefreshing(true);
+        homeSwipeLayout.setColorSchemeColors(Color.rgb(0, 0, 0));
+//        homeSwipeLayout.setRefreshing(true);
         homeRecyclerView.setAdapter(homeRvAdapter);
-        homeRecyclerView.showShimmerAdapter();
 
-        mPresenter.autoRefresh(getActivity());
+        mPresenter.autoRefresh();
 
         homeSwipeLayout.setOnRefreshListener(this);
         homeRvAdapter.setOnLoadMoreListener(this);
@@ -149,7 +148,7 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
 
     @Override
     public void getHomeListSuccess(@NotNull HomeResult homeDatasResult, boolean isRefresh) {
-        homeRecyclerView.hideShimmerAdapter();
+        showNormal();
         homeSwipeLayout.setRefreshing(false);
         if (isRefresh) {
             homeResult = homeDatasResult.getDatas();
@@ -162,15 +161,25 @@ public class HomeFragment extends BaseMvpFragment<HomeFPresenter> implements Hom
     }
 
     @Override
+    public void getHomeListFail(@NotNull String error) {
+        showError(error);
+    }
+
+    @Override
+    public void reLoad() {
+        mPresenter.autoRefresh();
+    }
+
+    @Override
     public void onRefresh() {
         EventBus.getDefault().post(new MsgEvent(0));
         homeSwipeLayout.setRefreshing(true);
-        mPresenter.autoRefresh(getActivity());
+        mPresenter.autoRefresh();
     }
 
     @Override
     public void onLoadMoreRequested() {
-        mPresenter.loadMore(getActivity());
+        mPresenter.loadMore();
     }
 
 
