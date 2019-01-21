@@ -15,6 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.zyh.wanandroid.App;
 import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
+import com.zyh.wanandroid.ui.about.AboutFragment;
 import com.zyh.wanandroid.ui.collect.CollectFragment;
 import com.zyh.wanandroid.ui.knowledge.article.KnowledgeArticleFragment;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
@@ -63,6 +64,8 @@ public class MineFragment extends LBaseMvpFragment<MineFPresenter> implements Mi
     @Inject
     CollectFragment collectFragment;
     @Inject
+    AboutFragment aboutFragment;
+    @Inject
     KnowledgeArticleFragment knowledgeArticleFragment;
 
     @Inject
@@ -99,6 +102,7 @@ public class MineFragment extends LBaseMvpFragment<MineFPresenter> implements Mi
                     ((MainFragment) getParentFragment()).goFragment(collectFragment,-1);
                 break;
             case R.id.tv_knowledge:
+                EventBus.getDefault().post(new MsgEvent(2));
                 break;
             case R.id.tv_todo:
                 ToastUtils.showShortToast("未完待续...");
@@ -107,7 +111,7 @@ public class MineFragment extends LBaseMvpFragment<MineFPresenter> implements Mi
                 ToastUtils.showShortToast("未完待续...");
                 break;
             case R.id.tv_about:
-                ToastUtils.showShortToast("未完待续...");
+                ((MainFragment) getParentFragment()).goFragment(aboutFragment,-1);
                 break;
             case R.id.tv_logout:
                 mPresenter.logout();

@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.common.util.PrefsUtils;
+import com.common.util.SystemUtil;
 import com.common.util.ToastUtils;
 import com.just.agentweb.AgentWeb;
 import com.zyh.wanandroid.App;
@@ -212,9 +213,7 @@ public class WebFragment extends LBaseMvpFragment<WebFPresenter> implements WebF
     }
 
     private void copyUrl() {
-        ClipboardManager cm = (ClipboardManager) getActivity()
-                .getSystemService(Context.CLIPBOARD_SERVICE);
-        cm.setPrimaryClip(ClipData.newPlainText(null, link));
+        SystemUtil.copyToClipBoard(getActivity(),link);
         ToastUtils.showShortToast("复制成功");
     }
     //收藏成功

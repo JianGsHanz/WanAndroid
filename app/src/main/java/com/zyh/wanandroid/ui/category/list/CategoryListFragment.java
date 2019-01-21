@@ -3,6 +3,8 @@ package com.zyh.wanandroid.ui.category.list;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.common.util.SystemUtil;
 import com.common.util.ToastUtils;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.zyh.wanandroid.App;
@@ -23,9 +26,7 @@ import com.zyh.wanandroid.model.CategoryListResult;
 import com.zyh.wanandroid.ui.category.adapter.CategoryListAdapter;
 import com.zyh.wanandroid.ui.main.MainFragment;
 import com.zyh.wanandroid.ui.web.WebFragment;
-import com.zyh.wanandroid.utils.event.MsgEvent;
 
-import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -54,6 +55,10 @@ public class CategoryListFragment extends LBaseMvpFragment<CategoryListFPresente
     TextView titleName;
     @BindView(R.id.search)
     ImageView search;
+    @BindView(R.id.normal_view)
+    ConstraintLayout normalView;
+    @BindView(R.id.title_layout)
+    AppBarLayout titleLayout;
     private int id;
     private CategoryListAdapter categoryListAdapter;
     private List<CategoryListResult.DataBean.DatasBean> dataList = new ArrayList<>();
@@ -75,9 +80,16 @@ public class CategoryListFragment extends LBaseMvpFragment<CategoryListFPresente
 
     @Override
     protected void initViewAndEvent() {
-        if (!TextUtils.isEmpty(keyWord)) {
-
+        if (TextUtils.isEmpty(keyWord)) {
+            titleLayout.setVisibility(View.GONE);
         } else {
+            titleLayout.setVisibility(View.VISIBLE);
+            titleName.setText("搜索结果");
+            search.setVisibility(View.INVISIBLE);
+            ConstraintLayout.LayoutParams lp =
+                    new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.setMargins(0, SystemUtil.dp2px(getActivity(),48),0,0);
+            categorySwipe.setLayoutParams(lp);
         }
     }
 
@@ -144,10 +156,13 @@ public class CategoryListFragment extends LBaseMvpFragment<CategoryListFPresente
     public void getCategoryListFail(@NotNull String errorMsg) {
         if (TextUtils.isEmpty(errorMsg))
             categoryListAdapter.loadMoreEnd();
-        else
+        else if (!TextUtils.isEmpty(keyWord) && categoryListAdapter.getData().size() == 0) {
+            ToastUtils.showShortToast(errorMsg);
+            _mActivity.onBackPressed();
+        } else
             ToastUtils.showShortToast(errorMsg);
 
-        _mActivity.onBackPressed();
+
 
     }
 

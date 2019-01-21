@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.about.AboutFragment">
+
+    <com.zyh.wanandroid.utils.view.slidenested.SlideNestedPanelLayout
+        android:id="@+id/slideNestedPanelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:anchorPoint="0.65"
+        app:panelHeight="250dp"
+        app:parallaxOffset="50dp"
+        app:scrollView="@+id/nestedScrollView">
+
+        <include layout="@layout/layout_top" />
+
+        <include layout="@layout/layout_bottom" />
+
+    </com.zyh.wanandroid.utils.view.slidenested.SlideNestedPanelLayout>
+
+</android.support.constraint.ConstraintLayout>
