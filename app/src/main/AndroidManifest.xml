@@ -37,6 +37,7 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <service android:name="com.common.widget.NetworkService"/>
     </application>
 
 </manifest>
