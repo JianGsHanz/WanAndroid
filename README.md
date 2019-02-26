@@ -3,7 +3,7 @@
 <br>
 <br>
 以下是效果图：
-![image](https://github.com/JianGsHanz/WanAndroid/images/效果.gif)
+![image](https://github.com/JianGsHanz/WanAndroid/images/effect.gif)
 
         
       
