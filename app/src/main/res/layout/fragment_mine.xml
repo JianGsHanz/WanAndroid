@@ -53,20 +53,10 @@
         custom:textSize="@dimen/sp14"/>
 
     <com.zyh.wanandroid.utils.view.CustomSettingLayout
-        android:id="@+id/tv_knowledge"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"
-        app:layout_constraintTop_toBottomOf="@id/tv_collect"
-        custom:drawableLeft="@mipmap/ic_knowledge_system"
-        custom:text="@string/string_know_system"
-        custom:textColor="@color/colorGray"
-        custom:textSize="@dimen/sp14"/>
-
-    <com.zyh.wanandroid.utils.view.CustomSettingLayout
         android:id="@+id/tv_todo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        app:layout_constraintTop_toBottomOf="@id/tv_knowledge"
+        app:layout_constraintTop_toBottomOf="@id/tv_collect"
         custom:drawableLeft="@mipmap/ic_todo"
         custom:text="@string/string_todo"
         custom:textColor="@color/colorGray"

@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.common.base.BaseFragment;
-import com.common.util.ToastUtils;
 import com.wyt.searchbox.SearchFragment;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
 import com.zyh.wanandroid.App;
@@ -66,8 +65,6 @@ public class MainFragment extends BaseFragment implements ISupportFragment, IOnS
 
     private SupportFragment[] fragments = new SupportFragment[5];
     private SearchFragment searchFragment;
-    private BottomBarTab kBarTab,mBarTab;
-    private int prePosition = 0;
 
     @Inject
     public MainFragment() {
@@ -104,24 +101,18 @@ public class MainFragment extends BaseFragment implements ISupportFragment, IOnS
     @Override
     protected void initViewAndEvent() {
         titleName.setText("首页");
-        kBarTab = new BottomBarTab(_mActivity, R.mipmap.ic_article, "知识");
-        mBarTab = new BottomBarTab(_mActivity, R.mipmap.ic_me, "我的");
+
         bottomBar
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_home, "首页"))
                 .addItem(new BottomBarTab(_mActivity, R.drawable.ic_navigation, "导航"))
-                .addItem(this.kBarTab)
+                .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_article, "知识"))
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_category, "分类"))
-                .addItem(mBarTab);
+                .addItem(new BottomBarTab(_mActivity, R.mipmap.ic_me, "我的"));
 
         bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @SuppressLint("RestrictedApi")
             @Override
             public void onTabSelected(int position, int prePosition) {
-                if (MainFragment.this.prePosition == -1){
-                    position = 2;
-                    kBarTab.setSelected(false);
-                }
-                MainFragment.this.prePosition = 0;
                 switch (position) {
                     case 0:
                         titleName.setText("首页");
@@ -166,13 +157,7 @@ public class MainFragment extends BaseFragment implements ISupportFragment, IOnS
         if ((int) msgEvent.getO() == 1) {
             fab.setVisibility(View.VISIBLE);
             fab.animate().scaleX(1F).scaleY(1F).setDuration(500).start();
-        }else if((int) msgEvent.getO() == 2){
-            showHideFragment(fragments[2],fragments[4]);
-            kBarTab.setSelected(true);
-            mBarTab.setSelected(false);
-            titleName.setText("知识");
-            prePosition = -1;
-        } else {
+        }else {
             fab.animate().scaleX(0F).scaleY(0F).setDuration(500).start();
         }
     }

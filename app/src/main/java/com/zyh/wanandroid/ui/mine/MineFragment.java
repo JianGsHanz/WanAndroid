@@ -13,14 +13,13 @@ import com.common.util.PrefsUtils;
 import com.common.util.ToastUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zyh.wanandroid.App;
-import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.R;
+import com.zyh.wanandroid.base.LBaseMvpFragment;
 import com.zyh.wanandroid.ui.about.AboutFragment;
 import com.zyh.wanandroid.ui.collect.CollectFragment;
 import com.zyh.wanandroid.ui.knowledge.article.KnowledgeArticleFragment;
 import com.zyh.wanandroid.ui.login.LoginRegisterFragment;
 import com.zyh.wanandroid.ui.main.MainFragment;
-import com.zyh.wanandroid.utils.event.MsgEvent;
 import com.zyh.wanandroid.utils.view.CustomSettingLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -48,8 +47,6 @@ public class MineFragment extends LBaseMvpFragment<MineFPresenter> implements Mi
     Button btLoginRegister;
     @BindView(R.id.tv_collect)
     CustomSettingLayout tvCollect;
-    @BindView(R.id.tv_knowledge)
-    CustomSettingLayout tvKnowledge;
     @BindView(R.id.tv_todo)
     CustomSettingLayout tvTodo;
     @BindView(R.id.tv_update)
@@ -88,7 +85,7 @@ public class MineFragment extends LBaseMvpFragment<MineFPresenter> implements Mi
         isLogin();
     }
 
-    @OnClick({R.id.bt_login_register, R.id.tv_collect, R.id.tv_knowledge, R.id.tv_todo, R.id.tv_update, R.id.tv_about,R.id.tv_logout})
+    @OnClick({R.id.bt_login_register, R.id.tv_collect,  R.id.tv_todo, R.id.tv_update, R.id.tv_about,R.id.tv_logout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_login_register:
@@ -100,9 +97,6 @@ public class MineFragment extends LBaseMvpFragment<MineFPresenter> implements Mi
                     ((MainFragment) getParentFragment()).goFragment(LoginRegisterFragment.newInstance(), -1);
                 else
                     ((MainFragment) getParentFragment()).goFragment(collectFragment,-1);
-                break;
-            case R.id.tv_knowledge:
-                EventBus.getDefault().post(new MsgEvent(2));
                 break;
             case R.id.tv_todo:
                 ToastUtils.showShortToast("未完待续...");
