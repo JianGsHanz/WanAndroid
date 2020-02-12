@@ -12,7 +12,7 @@ import io.reactivex.functions.Consumer;
 
 /**
  * author : zyh
- * Date : 2018/11/30
+ * Date : 2019/1/30
  * Description :
  */
 public class MineFPresenter extends AbsBasePresenter<MineFConstract.view> implements MineFConstract.presenter{

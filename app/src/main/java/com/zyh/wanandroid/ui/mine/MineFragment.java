@@ -35,7 +35,7 @@ import butterknife.Unbinder;
 
 /**
  * author : zyh
- * Date : 2018/11/30
+ * Date : 2019/1/30
  * Description :我的
  */
 public class MineFragment extends LBaseMvpFragment<MineFPresenter> implements MineFConstract.view {

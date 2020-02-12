@@ -12,7 +12,7 @@ import io.reactivex.functions.Consumer;
 
 /**
  * author : zyh
- * Date : 2018/11/29
+ * Date : 2019/1/29
  * Description :
  */
 public class SplashPresenter extends AbsBasePresenter<SplashContract.view> implements SplashContract.presenter {

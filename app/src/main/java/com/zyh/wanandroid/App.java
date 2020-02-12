@@ -41,7 +41,7 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
 /**
  * author : zyh
- * Date : 2018/11/26
+ * Date : 2019/1/26
  * Description :
  */
 public class App extends Application {

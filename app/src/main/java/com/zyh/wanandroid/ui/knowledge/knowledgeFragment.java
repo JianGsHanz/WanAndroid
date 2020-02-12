@@ -29,7 +29,7 @@ import butterknife.Unbinder;
 
 /**
  * author : zyh
- * Date : 2018/11/30
+ * Date : 2019/1/30
  * Description :知识
  */
 public class knowledgeFragment extends LBaseMvpFragment<knowledgeFPresenter> implements knowledgeFConstract.view, BaseQuickAdapter.OnItemClickListener {
