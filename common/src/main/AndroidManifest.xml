@@ -2,8 +2,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.common">
 
-    <uses-sdk
-        android:minSdkVersion="15"
-        android:targetSdkVersion="25"/>
 
 </manifest>
