@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:name">
+        tools:replace="android:name"
+        tools:remove="android:requestLegacyExternalStorage">
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />

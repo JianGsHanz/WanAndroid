@@ -15,9 +15,9 @@
 
     <style name="SplashTheme" parent="AppTheme">
         <!--<item name="android:windowBackground">@drawable/first</item>-->
-        <item name="android:windowFullscreen">true</item>
+<!--        <item name="android:windowFullscreen">true</item>-->
         <item name="windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>/
+        <item name="android:windowIsTranslucent">true</item>
         <!--<item name="android:windowDisablePreview">true</item>-->
     </style>
 

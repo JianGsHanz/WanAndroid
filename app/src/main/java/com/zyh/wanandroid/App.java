@@ -5,6 +5,7 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.common.app.ActivityLifecycleManager;
@@ -49,6 +50,13 @@ public class App extends Application {
     private static App app;
     private AppComponent build;
     private Set<Activity> allActivities;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

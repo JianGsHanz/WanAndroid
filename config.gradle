@@ -39,6 +39,7 @@ ext{
             "butterknife-compiler" :"com.jakewharton:butterknife-compiler:8.8.1",
             "butterknife-compiler" :"com.jakewharton:butterknife-compiler:8.8.1",
             "dagger" :"com.google.dagger:dagger:2.19",
-            "dagger-compiler" :"com.google.dagger:dagger-compiler:2.19"
+            "dagger-compiler" :"com.google.dagger:dagger-compiler:2.19",
+            "multidex" :"com.android.support:multidex:1.0.3"
     ]
 }
