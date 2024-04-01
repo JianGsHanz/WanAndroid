@@ -1,9 +1,9 @@
 package com.zyh.wanandroid.ui.about
 
 import android.os.Bundle
-import android.support.v4.text.HtmlCompat
-import android.support.v4.widget.NestedScrollView
-import android.support.v4.widget.TextViewCompat
+import androidx.core.text.HtmlCompat
+import androidx.core.widget.NestedScrollView
+import androidx.core.widget.TextViewCompat
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View

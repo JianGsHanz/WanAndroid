@@ -3,7 +3,7 @@ package com.common.util;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;

@@ -1,8 +1,8 @@
 package com.zyh.wanandroid.ui.login;
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.TabLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import com.google.android.material.tabs.TabLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;

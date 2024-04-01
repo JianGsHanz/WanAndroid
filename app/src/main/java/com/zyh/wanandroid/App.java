@@ -5,7 +5,7 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 import android.util.Log;
 
 import com.common.app.ActivityLifecycleManager;
@@ -22,7 +22,6 @@ import com.facebook.common.memory.MemoryTrimmableRegistry;
 import com.facebook.common.memory.NoOpMemoryTrimmableRegistry;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.mob.MobSDK;
 import com.zyh.wanandroid.di.component.ActivityComponent;
 import com.zyh.wanandroid.di.component.ApiComponent;
 import com.zyh.wanandroid.di.component.DaggerActivityComponent;
@@ -65,7 +64,6 @@ public class App extends Application {
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleManager());
         Utils.init(this);
-        MobSDK.init(this);
         initPrefs();
         initNetwork();
         initCrashHandler();

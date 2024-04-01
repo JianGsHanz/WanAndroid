@@ -15,7 +15,7 @@ import com.zyh.wanandroid.R
  */
 class MDialog: Dialog{
     constructor(context: Context) : this(context, R.style.dialog){}
-    constructor(context: Context?, themeResId: Int) : super(context, themeResId) {}
+    constructor(context: Context, themeResId: Int) : super(context, themeResId) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

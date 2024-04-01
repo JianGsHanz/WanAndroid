@@ -1,6 +1,6 @@
 package com.common.util;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

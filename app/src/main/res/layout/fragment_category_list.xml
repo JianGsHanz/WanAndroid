@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/normal_view"
@@ -7,7 +7,7 @@
 
     <include layout="@layout/layout_title"
         android:id="@+id/title_layout"/>
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         app:layout_constraintTop_toBottomOf="@id/title_layout"
         android:id="@+id/category_swipe"
         android:layout_width="match_parent"
@@ -19,6 +19,6 @@
             android:layout_height="match_parent"
             app:shimmer_demo_layout="@layout/skeleton_category_list"
             app:shimmer_demo_shimmer_color="#73ffffff"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

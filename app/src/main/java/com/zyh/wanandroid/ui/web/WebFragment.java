@@ -1,13 +1,10 @@
 package com.zyh.wanandroid.ui.web;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +33,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 /**
  * author : zyh
  * Date : 2018/12/3
@@ -188,7 +184,7 @@ public class WebFragment extends LBaseMvpFragment<WebFPresenter> implements WebF
     }
 
     private void share() {
-        OnekeyShare oks = new OnekeyShare();
+/*        OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
         oks.disableSSOWhenAuthorize();
 
@@ -203,7 +199,7 @@ public class WebFragment extends LBaseMvpFragment<WebFPresenter> implements WebF
         // url在微信、微博，Facebook等平台中使用
         oks.setUrl(link);
         // 启动分享GUI
-        oks.show(getActivity());
+        oks.show(getActivity());*/
     }
 
     private void openBrowser() {

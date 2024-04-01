@@ -1,19 +1,18 @@
 ext{
 
     android = [
-            compileSdkVersion: 28,
-            buildToolsVersion: "28.0.3",
+            compileSdkVersion: 33,
             minSdkVersion    : 16,
-            targetSdkVersion : 28,
+            targetSdkVersion : 33,
             versionCode      : 1,
             versionName      : "1.0"
     ]
 
     dependencies =[
-            "constraint-layout" :"com.android.support.constraint:constraint-layout:1.1.3",
-            "design" :"com.android.support:design:28.0.0",
-            "appcompat-v7" :"com.android.support:appcompat-v7:28.0.0",
-            "cardview" :"com.android.support:cardview-v7:28.0.0",
+            "constraint-layout" : 'androidx.constraintlayout:constraintlayout:1.1.3',
+            "design" : 'com.google.android.material:material:1.0.0',
+            "appcompat-v7" : 'androidx.appcompat:appcompat:1.0.0',
+            "cardview" : 'androidx.cardview:cardview:1.0.0',
             "rxandroid2" :"io.reactivex.rxjava2:rxandroid:2.0.1",
             "rxjava2" :"io.reactivex.rxjava2:rxjava:2.1.3",
             "rxlifecycle" :"com.trello.rxlifecycle2:rxlifecycle:2.2.1",
@@ -36,10 +35,10 @@ ext{
             "flowlayout" :"com.hyman:flowlayout-lib:1.1.2",
             "agentweb" :"com.just.agentweb:agentweb:4.0.2",
             "rxpermissions" :"com.github.tbruyelle:rxpermissions:0.10.2",
-            "butterknife-compiler" :"com.jakewharton:butterknife-compiler:8.8.1",
-            "butterknife-compiler" :"com.jakewharton:butterknife-compiler:8.8.1",
+            "butterknife" :"com.jakewharton:butterknife:10.0.0",
+            "butterknife-compiler" :"com.jakewharton:butterknife-compiler:10.0.0",
             "dagger" :"com.google.dagger:dagger:2.19",
             "dagger-compiler" :"com.google.dagger:dagger-compiler:2.19",
-            "multidex" :"com.android.support:multidex:1.0.3"
+            "multidex" : 'androidx.multidex:multidex:2.0.0'
     ]
 }

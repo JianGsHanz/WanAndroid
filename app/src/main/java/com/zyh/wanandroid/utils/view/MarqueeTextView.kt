@@ -3,7 +3,7 @@ package com.zyh.wanandroid.utils.view
 import android.content.Context
 import android.util.AttributeSet
 
-class MarqueeTextView : android.support.v7.widget.AppCompatTextView {
+class MarqueeTextView : androidx.appcompat.widget.AppCompatTextView {
     constructor(context: Context) : super(context) {}
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}

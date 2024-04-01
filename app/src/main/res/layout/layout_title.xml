@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_height"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,7 +7,7 @@
     android:id="@+id/title_layout"
     android:theme="@style/AppTheme.AppBarOverlay">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         app:layout_scrollFlags="scroll|enterAlways"
         android:layout_marginTop="@dimen/d_10"
         android:layout_width="match_parent"
@@ -35,6 +35,6 @@
             android:layout_marginBottom="@dimen/d_5"
             android:layout_marginTop="@dimen/d_15"
             android:src="@mipmap/ic_search_article" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</android.support.design.widget.AppBarLayout>
+</com.google.android.material.appbar.AppBarLayout>

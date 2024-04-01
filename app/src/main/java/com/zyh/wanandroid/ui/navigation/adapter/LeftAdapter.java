@@ -2,13 +2,11 @@ package com.zyh.wanandroid.ui.navigation.adapter;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.common.util.LogUtils;
 import com.zyh.wanandroid.R;
 import com.zyh.wanandroid.model.NavigationResult;
 

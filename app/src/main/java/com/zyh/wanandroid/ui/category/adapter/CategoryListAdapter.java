@@ -1,6 +1,6 @@
 package com.zyh.wanandroid.ui.category.adapter;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
